@@ -1,0 +1,87 @@
+<section class="section">
+  <div class="columns is-centered is-mobile is-tablet">
+    <div class="column is-one-third is-hidden-mobile is-hidden-tablet">
+    </div>
+    <div class="column is-one-third-desktop is-two-thirds-tablet is-full-mobile">
+      <% @items.each do |item| %>
+      <div class="card">
+        <div class="card-content">
+          <div class="level has-text-grey is-size-7">
+            <div class="level-left">
+              <div class="level-item">
+                <%= link_to item.feed, feed_url(item.feed), class: 'has-text-grey' %>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="level-item">
+                <%= time_ago_in_words item.published_at %> ago
+              </div>
+            </div>
+          </div>
+          <h2 class="subtitle">
+            <%= link_to item.title, item.url, target: '_blank', rel: "noopener" %>
+          </h2>
+          <% if item.summary == item.summary(99999999) %>
+          <p>
+            <%= item.summary %>
+          </p>
+          <% else %>
+          <details>
+            <summary>
+              <%= item.summary %>
+            </summary>
+            <div>
+              <hr>
+              <%= item.summary(99999999) %>
+            </div>
+          </details>
+          <% end %>
+        </div>
+        <footer class="card-footer has-background-white-ter is-rounded-bottom">
+          <div class="card-footer-item">
+            <button class="button has-icon is-light is-small">
+              <span class="icon has-text-grey">
+                <i class="fas fa-share-alt-square"></i>
+              </span>
+            </button>
+          </div>
+          <div class="card-footer-item">
+            <button class="button has-icon is-light is-small">
+              <span class="icon has-text-grey">
+                <i class="fas fa-clock"></i>
+              </span>
+            </button>
+          </div>
+          <div class="card-footer-item">
+            <a class="button has-icon is-light is-small" href="<%= item_url(item) %>">
+              <span class="icon has-text-grey">
+                <i class="fas fa-anchor"></i>
+              </span>
+            </a>
+          </div>
+        </footer>
+      </div>
+      <br>
+      <% end %>
+    </div>
+    <div class="column is-one-third">
+      <%= form_tag("/", method: 'get', remote: true ) do %>
+      <h2 class="subtitle">
+        Feeds
+      </h2>
+      <ul>
+        <% Feed.all.order(:title).each do |feed| %>
+        <li>
+          <label class="checkbox">
+            <input class="on-change-submit-form" type="checkbox" name="feed_ids[]" value="<%= feed.id %>" <%= 'checked' if @feeds.include?(feed) %>>
+            <a href="?feed_ids[]=<%= feed.id %>">
+              <%= feed %>
+            </a>
+          </label>
+        </li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</section>
