@@ -12,6 +12,29 @@ class Feed < ApplicationRecord
     title
   end
 
+  def xml
+    tries = 30
+
+    begin
+      puts("#{tries}: Importing #{url}")
+      response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 1.hour) do
+        URI.open(url, redirect: false).read
+      end
+    rescue OpenURI::HTTPRedirect => e
+      url = e.uri.to_s
+      update(url: url)
+      retry if (tries -= 1) > 0
+    rescue OpenURI::HTTPError, SocketError
+      response = nil
+    end
+
+    response
+  end
+
+  def feed
+    Feedjira.parse(xml)
+  end
+
   def self.import_from_opml(opml)
     feeds = []
     outline = OPML.load_file(opml)
@@ -27,7 +50,9 @@ class Feed < ApplicationRecord
 
     begin
       puts("#{tries}: Importing #{url}")
-      response = URI.open(url, redirect: false).read
+      response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 1.hour) do
+        URI.open(url, redirect: false).read
+      end
     rescue OpenURI::HTTPRedirect => e
       url = e.uri.to_s # assigned from the "Location" response header
       retry if (tries -= 1) > 0
@@ -50,11 +75,13 @@ class Feed < ApplicationRecord
 
   def fetch
     new_items = []
-    response = URI.open(url).read
+    response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 1.hour) do
+      URI.open(url, redirect: false).read
+    end
     begin
       feed = Feedjira.parse(response)
       feed.entries.each do |entry|
-        new_items << items.where(url: entry.url).first_or_create(title: entry.title, body: entry.summary || entry.content, published_at: entry.published)
+        new_items << items.where(url: entry.url).first_or_create(title: entry.title, body: entry.summary || entry.content, published_at: entry.published, original: entry.to_h)
       end
       new_items
     rescue Feedjira::NoParserAvailable

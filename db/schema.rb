@@ -10,20 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_180645) do
+ActiveRecord::Schema.define(version: 2020_07_04_091622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-
-  create_table "feed_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "feed_id", null: false
-    t.uuid "item_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["feed_id"], name: "index_feed_items_on_feed_id"
-    t.index ["item_id"], name: "index_feed_items_on_item_id"
-  end
 
   create_table "feed_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "feed_id", null: false
@@ -50,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_180645) do
     t.datetime "published_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.jsonb "original", default: {}, null: false
     t.index ["feed_id"], name: "index_items_on_feed_id"
   end
 
@@ -73,8 +65,6 @@ ActiveRecord::Schema.define(version: 2020_07_03_180645) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "feed_items", "feeds"
-  add_foreign_key "feed_items", "items"
   add_foreign_key "feed_profiles", "feeds"
   add_foreign_key "feed_profiles", "profiles"
   add_foreign_key "items", "feeds"

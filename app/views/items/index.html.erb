@@ -1,42 +1,46 @@
 <section class="section">
-  <div class="columns is-centered is-mobile is-tablet">
+  <div class="columns is-centered is-tablet">
     <div class="column is-one-third is-hidden-mobile is-hidden-tablet">
     </div>
-    <div class="column is-one-third-desktop is-two-thirds-tablet is-full-mobile">
+    <div class="column is-one-third-desktop is-two-thirds-tablet">
+      <% current_time_ago = 0 %>
       <% @items.each do |item| %>
+      <% if current_time_ago != time_ago_in_words(item.published_at) %>
+      <div class="has-text-centered content">
+        <% current_time_ago = time_ago_in_words(item.published_at) %>
+        <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
+      </div>
+      <% end %>
       <div class="card">
+        <% if image = item.image %>
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="<%= image %>" alt="Placeholder image">
+          </figure>
+        </div>
+        <% end %>
         <div class="card-content">
-          <div class="level has-text-grey is-size-7">
-            <div class="level-left">
-              <div class="level-item">
-                <%= link_to item.feed, feed_url(item.feed), class: 'has-text-grey' %>
-              </div>
-            </div>
-            <div class="level-right">
-              <div class="level-item">
-                <%= time_ago_in_words item.published_at %> ago
-              </div>
-            </div>
-          </div>
+          <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
           <h2 class="subtitle">
             <%= link_to item.title, item.url, target: '_blank', rel: "noopener" %>
           </h2>
           <% if item.summary == item.summary(99999999) %>
           <p>
-            <%= item.summary %>
+            <%= item.summary.html_safe %>
           </p>
           <% else %>
           <details>
             <summary>
-              <%= item.summary %>
+              <%= item.summary.html_safe %>
             </summary>
             <div>
               <hr>
-              <%= item.summary(99999999) %>
+              <%= item.summary(99999999).html_safe %>
             </div>
           </details>
           <% end %>
         </div>
+        <!--
         <footer class="card-footer has-background-white-ter is-rounded-bottom">
           <div class="card-footer-item">
             <button class="button has-icon is-light is-small">
@@ -60,6 +64,7 @@
             </a>
           </div>
         </footer>
+        -->
       </div>
       <br>
       <% end %>
