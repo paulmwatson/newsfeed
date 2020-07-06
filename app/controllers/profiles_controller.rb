@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_profile, only: %i[show edit update destroy destroy_feed_profile]
 
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = current_user.profiles
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
-  def show
-  end
+  def show; end
 
   # GET /profiles/new
   def new
@@ -18,13 +20,14 @@ class ProfilesController < ApplicationController
   end
 
   # GET /profiles/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /profiles
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    @profile.user = current_user
+    @profile.feed_ids = Feed.pluck(:id)
 
     respond_to do |format|
       if @profile.save
@@ -61,14 +64,25 @@ class ProfilesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile
-      @profile = Profile.find(params[:id])
+  # DELETE /profiles/1
+  # DELETE /profiles/1.json
+  def destroy_feed_profile
+    @profile.feed_profiles.where(feed_id: params[:feed_id]).destroy_all
+    respond_to do |format|
+      format.html { redirect_to request.referer, notice: 'Profile was successfully destroyed.' }
+      format.json { head :no_content }
     end
+  end
 
-    # Only allow a list of trusted parameters through.
-    def profile_params
-      params.require(:profile).permit(:user_id, :name)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile
+    @profile = Profile.find(params[:id] || params[:profile_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def profile_params
+    params.require(:profile).permit(:name)
+  end
 end

@@ -1,0 +1,60 @@
+<nav class="navbar is-fixed-bottom is-warning" role="navigation" aria-label="main navigation" data-turbolinks-animate-persist="true">
+  <div class="navbar-brand">
+    <%= link_to :root, class: 'navbar-item has-icon' do %>
+    <span class="icon">
+      <i class="fas fa-rss-square"></i>
+    </span>
+    <span class="is-hidden-mobile">
+      Newsfeed
+    </span>
+    <%- end -%>
+    <% if @items %>
+    <%= render partial: 'profiles' %>
+    <%= render partial: 'time_ranges' %>
+    <% end %>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarMain" class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+    <div class="navbar-end">
+      <%- if user_signed_in? -%>
+      <div class="dropdown is-hoverable is-right navbar-item is-up">
+        <div class="dropdown-trigger">
+          <button class="button is-outlined is-dark has-icon is-small" aria-haspopup="true" aria-controls="dropdown-menu2">
+            <span class="icon is-small">
+              <i class="far fa-user" aria-hidden="true"></i>
+            </span>
+            <span><%= current_user %></span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-up" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu has-text-black" id="dropdown-menu2" role="menu">
+          <div class="dropdown-content">
+            <%= link_to t('navigation.edit_account'), edit_user_registration_url(), class: 'navbar-item' %>
+            <div class="navbar-item">
+              <div class="buttons">
+                <%= link_to t('navigation.sign_out'), :destroy_user_session, method: :delete, class: "button is-outlined" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- else -%>
+        <div class="navbar-item">
+          <div class="buttons">
+            <%- unless user_signed_in? -%>
+            <%= link_to t('navigation.sign_in'), :new_user_session, class: "button" %>
+            <%= link_to t('navigation.sign_up'), :new_user_registration, class: "button" %>
+            <%- end -%>
+          </div>
+        </div>
+        <%- end -%>
+      </div>
+    </div>
+</nav>

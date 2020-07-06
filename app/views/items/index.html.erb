@@ -1,8 +1,6 @@
 <section class="section">
-  <div class="columns is-centered is-tablet">
-    <div class="column is-one-third is-hidden-mobile is-hidden-tablet">
-    </div>
-    <div class="column is-one-third-desktop is-two-thirds-tablet">
+  <div class="columns is-centered">
+    <div class="column is-one-third">
       <% current_time_ago = 0 %>
       <% @items.each do |item| %>
       <% if current_time_ago != time_ago_in_words(item.published_at) %>
@@ -40,52 +38,8 @@
           </details>
           <% end %>
         </div>
-        <!--
-        <footer class="card-footer has-background-white-ter is-rounded-bottom">
-          <div class="card-footer-item">
-            <button class="button has-icon is-light is-small">
-              <span class="icon has-text-grey">
-                <i class="fas fa-share-alt-square"></i>
-              </span>
-            </button>
-          </div>
-          <div class="card-footer-item">
-            <button class="button has-icon is-light is-small">
-              <span class="icon has-text-grey">
-                <i class="fas fa-clock"></i>
-              </span>
-            </button>
-          </div>
-          <div class="card-footer-item">
-            <a class="button has-icon is-light is-small" href="<%= item_url(item) %>">
-              <span class="icon has-text-grey">
-                <i class="fas fa-anchor"></i>
-              </span>
-            </a>
-          </div>
-        </footer>
-        -->
       </div>
       <br>
-      <% end %>
-    </div>
-    <div class="column is-one-third">
-      <%= form_tag("/", method: 'get', remote: true ) do %>
-      <h2 class="subtitle">
-        Feeds
-      </h2>
-      <ul>
-        <% Feed.all.order(:title).each do |feed| %>
-        <li>
-          <label class="checkbox">
-            <input class="on-change-submit-form" type="checkbox" name="feed_ids[]" value="<%= feed.id %>" <%= 'checked' if @feeds.include?(feed) %>>
-            <a href="?feed_ids[]=<%= feed.id %>">
-              <%= feed %>
-            </a>
-          </label>
-        </li>
-        <% end %>
-      </ul>
       <% end %>
     </div>
   </div>

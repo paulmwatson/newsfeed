@@ -6,8 +6,13 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : Feed.all.order(:title)
-    @items = Item.includes(:feed).where(feed: @feeds).order(published_at: :desc).limit(100)
+    if current_user
+      @profile = params[:profile_id] ? current_user.profiles.where(id: params[:profile_id]).first : current_user.profiles.first
+      @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : @profile.feeds.order(:title)
+    else
+      @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : Feed.all.order(:title)
+    end
+    @items = Item.includes(:feed).where(feed: @feeds).where('published_at > ?', Time.now - (params[:hours].to_i || 24).hours).order(published_at: :desc)
   end
 
   # GET /items/1
