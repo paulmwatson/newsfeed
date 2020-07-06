@@ -1,19 +1,20 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
 
-<p>
-  <strong>Title:</strong>
-  <%= @feed.title %>
-</p>
+  <p>
+    <strong>Title:</strong>
+    <%= @feed.title %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @feed.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @feed.description %>
+  </p>
 
-<p>
-  <strong>Url:</strong>
-  <%= @feed.url %>
-</p>
+  <p>
+    <strong>Url:</strong>
+    <%= @feed.url %>
+  </p>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+  <%= link_to 'Edit', edit_feed_path(@feed) %> |
+  <%= link_to 'Back', feeds_path %>
+</section>

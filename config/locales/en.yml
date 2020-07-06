@@ -5,8 +5,9 @@ en:
     sign_up: Sign Up
     sign_in: Sign In
   common:
+    feeds: feeds
     remove: Remove
-    world_news: World News (default)
+    world_news: World News
     or: or
     new_profile: New Profile
     edit_profile: Edit Profile

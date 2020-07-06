@@ -1,14 +1,19 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
 
-<p>
-  <strong>User:</strong>
-  <%= @profile.user_id %>
-</p>
+  <h1 class="title">
+    <%= @profile.name %>
+    <%= link_to 'Edit', edit_profile_path(@profile), class: 'button is-small' %>
+  </h1>
+  <h2 class="subtitle">
+    <%= t('common.feeds').humanize %>
+  </h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+  <ul>
+    <% @profile.feeds.each do |feed| %>
+    <li class="content">
+      <%= link_to t('common.remove'), profile_feed_destroy_url(profile_id: @profile.id, feed_id: feed.id), method: :delete, class: 'button is-small is-warning' %>
+      <%= link_to feed, feed %>
+    </li>
+    <% end %>
+  </ul>
+</section>

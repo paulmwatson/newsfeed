@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     else
       @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : Feed.all.order(:title)
     end
-    @items = Item.includes(:feed).where(feed: @feeds).where('published_at > ?', Time.now - (params[:hours].to_i || 24).hours).order(published_at: :desc)
+    @items = Item.includes(:feed).where(feed: @feeds).where('published_at > ?', Time.now - (params[:hours] || 24).to_i.hours).order(published_at: :desc)
   end
 
   # GET /items/1
