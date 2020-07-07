@@ -1,8 +1,8 @@
 <section class="section">
-  <h1>Editing Profile</h1>
+  <h1 class="title">
+    <%= t('common.edit_profile')%>
+  </h1>
 
   <%= render 'form', profile: @profile %>
 
-  <%= link_to 'Show', @profile %> |
-  <%= link_to 'Back', profiles_path %>
 </section>

@@ -1,11 +1,11 @@
 <div class="dropdown is-hoverable navbar-item is-up">
   <div class="dropdown-trigger">
-    <button class="button has-icon is-outlined is-dark is-small" aria-haspopup="true" aria-controls="dropdown-user">
+    <button class="button has-icon is-outlined is-dark" aria-haspopup="true" aria-controls="dropdown-user">
       <span class="icon">
         <i class="fa fa-clock"></i>
       </span>
-      <span>
-        <span class="is-hidden-mobile">Last</span> <%= params[:hours] || '24' %> <span class="is-hidden-mobile">hours</span>
+      <span class="is-hidden-mobile">
+        Last <%= @time_range %> hours
       </span>
       <span class="icon is-small">
         <i class="fas fa-angle-up" aria-hidden="true"></i>
@@ -14,9 +14,9 @@
   </div>
   <div class="dropdown-menu" id="dropdown-user" role="menu">
     <div class="dropdown-content">
-      <% %w[24 48 72].each do |hours| %>
-      <a class="dropdown-item" href="?hours=<%= hours %>">
-        Last <%= hours %> hours
+      <% %w[24 48 72].each do |time_range| %>
+      <a class="dropdown-item<%= ' has-text-weight-bold' if time_range == @time_range %>" href="?time_range=<%= time_range %>">
+        Last <%= time_range %> hours
       </a>
       <% end %>
     </div>

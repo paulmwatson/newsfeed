@@ -17,7 +17,7 @@
   <%= form.text_field :name %>
 </div>
 
-<div class="actions">
-  <%= form.submit %>
-</div>
+<p class="content">
+  <%= form.submit t("common.#{@profile.new_record? ? 'create' : 'save'}_profile"), class: 'button is-success is-small' %>
+</p>
 <% end %>

@@ -2,12 +2,13 @@
 
 class Item < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
-  include ActionView::Helpers::TextHelper
 
   belongs_to :feed
 
   def summary(length = 300)
-    truncate(strip_tags(body), length: length).gsub('Continue reading', '').gsub('&hellip;', '')
+    sanitized = sanitize(body, tags: %w[p br ul li blockquote], attributes: %w[]).gsub('Continue reading', '').gsub('&hellip;', '').gsub('<blockquote>', '<p>').gsub('</blockquote>', '</p>').gsub('…', '')
+    truncated = sanitized.slice(0, (sanitized.index(/[\.?!<]/, length) || -1))
+    truncated || sanitized
   end
 
   def image

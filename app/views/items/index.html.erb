@@ -1,46 +1,30 @@
-<section class="mt-4">
-  <div class="columns is-centered">
-    <div class="column is-one-third">
-      <% current_time_ago = 0 %>
-      <% @items.each do |item| %>
-      <% if current_time_ago != time_ago_in_words(item.published_at) %>
-      <div class="has-text-centered content">
-        <% current_time_ago = time_ago_in_words(item.published_at) %>
-        <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
-      </div>
-      <% end %>
-      <div class="card">
-        <% if image = item.image %>
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="<%= image %>" alt="Placeholder image">
-          </figure>
-        </div>
-        <% end %>
-        <div class="card-content">
-          <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
-          <h2 class="subtitle">
-            <%= link_to item.title, item.url, target: '_blank', rel: "noopener" %>
-          </h2>
-          <% if item.summary == item.summary(99999999) %>
-          <p>
-            <%= item.summary.html_safe %>
-          </p>
-          <% else %>
-          <details>
-            <summary>
-              <%= item.summary.html_safe %>
-            </summary>
-            <div>
-              <hr>
-              <%= item.summary(99999999).html_safe %>
-            </div>
-          </details>
-          <% end %>
-        </div>
-      </div>
-      <br>
-      <% end %>
+  <div class="container is-max-width-30em mt-5">
+    <% current_time_ago = 0 %>
+    <% @items.each do |item| %>
+    <% if current_time_ago != time_ago_in_words(item.published_at) %>
+    <div class="has-text-centered content">
+      <% current_time_ago = time_ago_in_words(item.published_at) %>
+      <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
     </div>
+    <% end %>
+    <div class="card">
+      <% if image = item.image %>
+      <div class="card-image">
+        <figure class="image">
+          <img src="<%= image %>" alt="Image for <%= item.title %>">
+        </figure>
+      </div>
+      <% end %>
+      <div class="card-content">
+        <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
+        <h2 class="subtitle">
+          <%= link_to item.title, item.url, target: '_blank', rel: "noopener" %>
+        </h2>
+        <div class="content">
+          <%= item.summary.html_safe %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <% end %>
   </div>
-</section>

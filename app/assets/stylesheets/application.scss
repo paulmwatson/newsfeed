@@ -15,9 +15,9 @@
 
 $primary: hsl(36, 100%, 50%);
 @import 'bulma/sass/utilities/_all';
+@import 'bulma/sass/helpers/color';
 @import 'bulma/sass/base/_all';
 @import 'bulma/sass/helpers/visibility';
-@import 'bulma/sass/helpers/color';
 @import 'bulma/sass/elements/container';
 @import 'bulma/sass/elements/image';
 @import 'bulma/sass/elements/content';

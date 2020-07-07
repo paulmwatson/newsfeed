@@ -6,13 +6,14 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    @time_range = (params[:time_range] || 24).to_i
     if current_user
       @profile = params[:profile_id] ? current_user.profiles.where(id: params[:profile_id]).first : current_user.profiles.first
       @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : @profile.feeds.order(:title)
     else
       @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : Feed.all.order(:title)
     end
-    @items = Item.includes(:feed).where(feed: @feeds).where('published_at > ?', Time.now - (params[:hours] || 24).to_i.hours).order(published_at: :desc)
+    @items = Item.includes(:feed).where(feed: @feeds).where('published_at > ?', Time.now - @time_range.hours).order(published_at: :desc)
   end
 
   # GET /items/1

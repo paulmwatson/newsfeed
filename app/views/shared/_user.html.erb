@@ -1,37 +1,28 @@
-<div class="dropdown is-hoverable navbar-item is-up is-right">
+<div class="dropdown is-hoverable navbar-item is-up is-right is-position-absolute-right-0">
   <div class="dropdown-trigger">
-    <button class="button is-outlined is-dark has-icon is-small" aria-haspopup="true" aria-controls="dropdown-user">
+    <button class="button is-outlined is-dark has-icon" aria-haspopup="true" aria-controls="dropdown-user">
       <span class="icon is-small">
-        <i class="far fa-user" aria-hidden="true"></i>
+        <i class="fas fa-rss-square" aria-hidden="true"></i>
       </span>
-      <% if user_signed_in? %>
       <span class="is-hidden-mobile">
-        <%= current_user %>
+        <%= current_user || 'Newsfeed' %>
       </span>
-      <% end %>
       <span class="icon is-small">
         <i class="fas fa-angle-up" aria-hidden="true"></i>
       </span>
     </button>
   </div>
-  <div class="dropdown-menu has-text-black" id="dropdown-user" role="menu">
+  <div class="dropdown-menu is-warning" id="dropdown-user" role="menu">
     <div class="dropdown-content">
+      <%= link_to t('navigation.home'), :root, class: 'navbar-item' %>
       <%- if user_signed_in? -%>
-      <%= link_to t('navigation.edit_account'), edit_user_registration_url(), class: 'navbar-item' %>
-      <div class="navbar-item">
-        <div class="buttons">
-          <%= link_to t('navigation.sign_out'), :destroy_user_session, method: :delete, class: 'button is-outlined is-small' %>
-        </div>
-      </div>
+      <%= link_to current_user, edit_user_registration_url(), class: 'navbar-item' %>
+      <hr class="dropdown-divider">
+      <%= link_to t('navigation.sign_out'), :destroy_user_session, method: :delete, class: 'navbar-item' %>
       <%- else -%>
-      <div class="navbar-item">
-        <div class="buttons">
-          <%= link_to t('navigation.sign_in'), :new_user_session, class: 'button is-small' %>
-
-          <%= link_to t('navigation.sign_up'), :new_user_registration, class: 'button is-small' %>
-        </div>
-        <%- end -%>
-      </div>
+      <%= link_to t('navigation.sign_in'), :new_user_session, class: 'navbar-item' %>
+      <%= link_to t('navigation.sign_up'), :new_user_registration, class: 'navbar-item' %>
+      <%- end -%>
     </div>
   </div>
 </div>

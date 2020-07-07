@@ -1,20 +1,9 @@
 <nav class="navbar is-fixed-bottom is-warning" role="navigation" aria-label="main navigation" data-turbolinks-animate-persist="true">
   <div class="navbar-brand">
-    <%= link_to :root, class: 'navbar-item has-icon' do %>
-    <span class="icon">
-      <i class="fas fa-rss-square"></i>
-    </span>
-    <span class="is-hidden-mobile">
-      Newsfeed
-    </span>
-    <%- end -%>
-
-
+    <%= render partial: '/items/profiles' %>
     <% if @items %>
-    <%= render partial: 'profiles' %>
-    <%= render partial: 'time_ranges' %>
+    <%= render partial: '/items/time_ranges' %>
     <% end %>
-
     <%= render partial: '/shared/user' %>
   </div>
 </nav>

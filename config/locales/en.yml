@@ -1,5 +1,6 @@
 en:
   navigation:
+    home: Home
     edit_account: Edit Account
     sign_out: Sign Out
     sign_up: Sign Up
@@ -9,9 +10,15 @@ en:
     remove: Remove
     world_news: World News
     or: or
-    new_profile: New Profile
-    edit_profile: Edit Profile
-    profiles: Profiles
+    profile: list
+    profiles: lists
+    new_profile: New List
+    edit_profile: Edit List
+    profiles: Lists
+    edit_profile: Edit List
+    new_profile: New List
+    create_profile: Create List
+    save_profile: Save List
   datetime:
     distance_in_words:
       about_x_hours:
