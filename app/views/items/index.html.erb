@@ -1,13 +1,24 @@
   <div class="container is-max-width-30em mt-5">
     <% current_time_ago = 0 %>
+
     <% @items.each do |item| %>
+
+    <% seen = [true, false].sample %>
+
     <% if current_time_ago != time_ago_in_words(item.published_at) %>
     <div class="has-text-centered content">
       <% current_time_ago = time_ago_in_words(item.published_at) %>
       <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
     </div>
     <% end %>
-    <div class="card">
+
+    <details class="card<%= ' is-seen' if seen %>" <%= 'open' unless seen %>>
+      <summary class="card-content">
+        <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
+        <h2 class="subtitle">
+          <%= link_to item.title, item.url, target: '_blank', rel: "noopener" %>
+        </h2>
+      </summary>
       <% if image = item.image %>
       <div class="card-image">
         <figure class="image">
@@ -16,15 +27,11 @@
       </div>
       <% end %>
       <div class="card-content">
-        <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
-        <h2 class="subtitle">
-          <%= link_to item.title, item.url, target: '_blank', rel: "noopener" %>
-        </h2>
         <div class="content">
           <%= item.summary.html_safe %>
         </div>
       </div>
-    </div>
+    </details>
     <br>
     <% end %>
   </div>

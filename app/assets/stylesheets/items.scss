@@ -1,3 +1,42 @@
 // Place all the styles related to the items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.is-seen {
+}
+
+details.card {
+  transform-origin: top center;
+  transition: all 0.2s ease-in-out;
+
+  summary:focus {
+    outline: none;
+  }
+
+  &:not([open]) {
+    transform: scale(0.9);
+    box-shadow: none;
+    cursor: pointer;
+
+    &.is-seen:hover {
+      transform: scale(0.95);
+    }
+
+    a {
+      color: grey;
+      pointer-events: none;
+    }
+  }
+
+  &[open] {
+    transform: scale(1);
+    box-shadow: $card-shadow;
+    a {
+      color: $link;
+      pointer-events: unset;
+    }
+  }
+}
+
+summary {
+  list-style-type: none;
+}
