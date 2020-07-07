@@ -14,3 +14,15 @@
   position: absolute;
   right: 0;
 }
+
+.is-border-top-darker {
+  border-top: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.is-border-bottom-darker {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.is-height-1000px {
+  height: 1000px;
+}

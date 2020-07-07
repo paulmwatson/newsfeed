@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     get '/items' => 'items#index', as: :items
     delete '/feeds/:feed_id' => 'profiles#destroy_feed_profile', as: :feed_destroy
   end
-  resources :items
+  resources :items do
+    get '/read' => 'items#read', as: :read
+    get '/seen' => 'items#seen', as: :seen
+  end
   resources :feeds
   devise_for :users
   root 'items#index'

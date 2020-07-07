@@ -5,12 +5,13 @@
 @import 'bulma/sass/helpers/color';
 @import 'bulma/sass/components/card';
 
-.is-seen {
+.is-just-seen {
+  filter: grayscale(1);
 }
 
 details.card {
   transform-origin: top center;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
   summary:focus {
     outline: none;
@@ -43,4 +44,8 @@ details.card {
 
 summary {
   list-style-type: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
 }

@@ -3,6 +3,8 @@
 class Item < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
 
+  has_many :item_users, dependent: :destroy
+
   belongs_to :feed
 
   def summary(length = 300)

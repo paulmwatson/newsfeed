@@ -1,7 +1,22 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[seen]
+  before_action :set_item, only: %i[show edit update destroy seen]
+
+  def read
+    if item = Item.where(id: params[:item_id]).first
+      current_user&.item_users&.create(item: item, user: current_user, action: :read)
+      redirect_to item.url
+    else
+      redirect_to :root, notice: 'Cannot find that item'
+    end
+  end
+
+  def seen
+    current_user&.item_users&.create(item: @item, action: :seen)
+    render json: true
+  end
 
   # GET /items
   # GET /items.json
@@ -10,6 +25,7 @@ class ItemsController < ApplicationController
     if current_user
       @profile = params[:profile_id] ? current_user.profiles.where(id: params[:profile_id]).first : current_user.profiles.first
       @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : @profile.feeds.order(:title)
+      @item_users = current_user.item_users.pluck(:item_id)
     else
       @feeds = params[:feed_ids] ? Feed.where(id: params[:feed_ids]) : Feed.all.order(:title)
     end
@@ -72,7 +88,7 @@ class ItemsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id] || params[:item_id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :profiles, dependent: :destroy
   has_many :feed_profiles, through: :profiles, dependent: :destroy
   has_many :feeds, through: :feed_profiles
+  has_many :item_users, dependent: :destroy
+  has_many :items, through: :item_users
 
   after_create :create_default_profile
 
