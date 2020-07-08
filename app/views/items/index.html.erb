@@ -4,6 +4,7 @@
     <% @items.each do |item| %>
 
     <% seen = item.item_users.where(user: current_user).count > 0 %>
+    <% image = item.image %>
 
     <% if current_time_ago != time_ago_in_words(item.published_at) %>
     <div class="has-text-centered content">
@@ -12,20 +13,20 @@
     </div>
     <% end %>
 
-    <details data-item-id="<%= item.id %>" class="is-item card pb-5<%= ' is-seen' if seen %>" <%= 'open' unless seen %>>
-      <summary class="card-content pb-0">
+    <details data-item-id="<%= item.id %>" class="is-item card<%= ' is-seen' if seen %><%= ' has-image' if image %>" <%= 'open' unless seen %>>
+      <summary class="card-content">
         <h2 class="subtitle">
           <%= link_to item.title, item_read_url(item), target: '_blank', rel: "noopener" %>
         </h2>
       </summary>
-      <% if image = item.image %>
-      <div class="card-image mt-4 is-border-bottom-darker is-border-top-darker">
+      <% if image %>
+      <div class="card-image mb-4 is-border-bottom-darker is-border-top-darker">
         <figure class="image">
           <img src="<%= image %>" alt="Image for <%= item.title %>" loading="lazy">
         </figure>
       </div>
       <% end %>
-      <div class="card-content pb-0 pt-0">
+      <div class="card-content pt-0">
         <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
         <div class="content">
           <%= item.summary.html_safe %>

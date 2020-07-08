@@ -32,6 +32,10 @@ details.card {
     }
   }
 
+  &[open]:not(.has-image) summary {
+    padding-bottom: 0;
+  }
+
   &[open] {
     transform: scale(1);
     box-shadow: $card-shadow;

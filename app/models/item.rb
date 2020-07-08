@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :feed
 
   def summary(length = 300)
-    sanitized = sanitize(body, tags: %w[p br ul li blockquote], attributes: %w[]).gsub('Continue reading', '').gsub('&hellip;', '').gsub('<blockquote>', '<p>').gsub('</blockquote>', '</p>').gsub('…', '')
+    sanitized = sanitize(body, tags: %w[p br ul li blockquote], attributes: %w[]).gsub('Continue reading', '').gsub('&hellip;', '').gsub('<blockquote>', '<p>').gsub('</blockquote>', '</p>').gsub('…', '').gsub('<p></p>', '').gsub('<p>', '').gsub('</p>', '<br>')
     truncated = sanitized.slice(0, (sanitized.index(/[\.?!<]/, length) || -1))
     truncated || sanitized
   end
