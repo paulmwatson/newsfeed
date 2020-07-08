@@ -1,19 +1,13 @@
-<section class="section">
+<section class="section pt-2 px-2">
+  <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+    <%= render partial: '/items/items', locals: {items: @items }%>
 
-  <h1 class="title">
-    <%= @profile.name %>
-    <%= link_to 'Edit', edit_profile_path(@profile), class: 'button is-small' %>
-  </h1>
-  <h2 class="subtitle">
-    <%= t('common.feeds').humanize %>
-  </h2>
-
-  <ul>
-    <% @profile.feeds.each do |feed| %>
-    <li class="content">
-      <%= link_to t('common.remove'), profile_feed_destroy_url(profile_id: @profile.id, feed_id: feed.id), method: :delete, class: 'button is-small is-warning' %>
-      <%= link_to feed, feed %>
-    </li>
-    <% end %>
-  </ul>
+    <hr class="is-height-1000px">
+    <p class="has-text-centered is-size-7 has-text-grey mb-1">
+      This is the end, beautiful friend<br>
+      This is the end, my only friend<br>
+      The end<br>
+      It hurts to set you free<br>
+    </p>
+  </div>
 </section>

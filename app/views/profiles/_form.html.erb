@@ -11,13 +11,76 @@
 </div>
 <% end %>
 
-
 <div class="field">
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+  <label class="label">Give your list a name:</label>
+  <div class="control">
+    <%= form.text_field :name, class: 'input' %>
+  </div>
 </div>
 
-<p class="content">
-  <%= form.submit t("common.#{@profile.new_record? ? 'create' : 'save'}_profile"), class: 'button is-success is-small' %>
+<div class="field">
+  <label class="checkbox">
+    <%= form.check_box :default %>
+    Make this your default list
+  </label>
+</div>
+
+
+<div class="field">
+  <label class="checkbox">
+    <%= form.check_box :default %>
+    Show images
+  </label>
+</div>
+
+<div class="field">
+  <label class="checkbox">
+    <%= form.check_box :default %>
+    Show read items
+  </label>
+</div>
+
+<label class="label">
+  Show items from the:
+</label>
+<div class="field">
+  <label class="checkbox">
+    <%= form.radio_button :default, 'asd' %>
+    Last 24 hours
+  </label>
+</div>
+<div class="field">
+  <label class="checkbox">
+    <%= form.radio_button :default, 'asd' %>
+    Last 3 days (covers weekends)
+  </label>
+</div>
+<div class="field">
+  <label class="checkbox">
+    <%= form.radio_button :default, 'asd' %>
+    Last year
+  </label>
+</div>
+
+
+
+<hr>
+<label class="label">
+  Select the feeds you want in your list:
+</label>
+
+<ul class="mb-5">
+  <% Feed.all.order(:title).each do |feed| %>
+  <li>
+    <label class="checkbox">
+      <%= check_box_tag "profile[feed_ids][]", feed.id, form.object.feeds.include?(feed) %>
+      <%= feed %>
+    </label>
+    <% end %>
+  </li>
+</ul>
+<hr>
+<p class="content has-text-centered">
+  <%= form.submit t("common.#{@profile.new_record? ? 'create' : 'save'}_profile"), class: 'button is-success' %>
 </p>
 <% end %>

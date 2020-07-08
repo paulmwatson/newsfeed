@@ -1,15 +1,29 @@
 <section class="section">
-
-  <h1>Profiles</h1>
-
-  <ul>
-    <% @profiles.each do |profile| %>
-    <li class="content">
-      <%= link_to profile, profile %>
-      <%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' %></td>
-    </li>
+  <div class="container is-max-width-30em  animate__animated animate__slideInUp">
+    <h1 class="title">
+      Your Lists
+    </h1>
+    <% current = '' %>
+    <% @profiles.order(:name).each_with_index do |profile, i| %>
+    <% if current != profile.name[0] %>
+    <% current = profile.name[0] %>
+    <% unless i == 0 %>
+  </div>
+  <% end %>
+  <h1 class="title has-text-grey-light">
+    <%= current %>
+  </h1>
+  <div class="box">
     <% end %>
-  </ul>
-
-
+    <h2 class="subtitle has-icon">
+      <span class="icon">
+        <i class="fa fa-list-alt"></i>
+      </span>
+      <span>
+        <%= link_to profile, profile %>
+      </span>
+    </h2>
+    <% end %>
+  </div>
+  </div>
 </section>

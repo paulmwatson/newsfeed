@@ -5,10 +5,6 @@
 @import 'bulma/sass/helpers/color';
 @import 'bulma/sass/components/card';
 
-.is-seen {
-  box-shadow: none !important;
-}
-
 details.card {
   transform-origin: top center;
   transition: transform 0.2s ease-in-out;

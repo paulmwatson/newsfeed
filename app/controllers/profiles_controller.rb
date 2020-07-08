@@ -2,7 +2,11 @@
 
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: %i[show edit update destroy destroy_feed_profile]
+  before_action :set_profile, only: %i[show edit update destroy]
+
+  def default
+    redirect_to current_user.profiles.order(default: :desc).order(:name).first
+  end
 
   # GET /profiles
   # GET /profiles.json
@@ -12,7 +16,11 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1
   # GET /profiles/1.json
-  def show; end
+  def show
+    @time_range = (params[:time_range] || 24).to_i
+    @items = Item.includes(:feed, :item_users).where(feed_id: @profile.feed_ids).where('published_at > ?', (Time.now - @time_range.hours)).order(published_at: :desc)
+    @seen_items = current_user.item_users.where(item: @items).pluck(:item_id)
+  end
 
   # GET /profiles/new
   def new
@@ -27,7 +35,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user = current_user
-    @profile.feed_ids = Feed.pluck(:id)
+    # @profile.feed_ids = Feed.pluck(:id)
 
     respond_to do |format|
       if @profile.save
@@ -59,17 +67,7 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  # DELETE /profiles/1
-  # DELETE /profiles/1.json
-  def destroy_feed_profile
-    @profile.feed_profiles.where(feed_id: params[:feed_id]).destroy_all
-    respond_to do |format|
-      format.html { redirect_to request.referer, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to :root, notice: 'Profile was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -83,6 +81,6 @@ class ProfilesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def profile_params
-    params.require(:profile).permit(:name)
+    params.require(:profile).permit(:name, :default, feed_ids: [])
   end
 end

@@ -1,31 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Feeds</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @feeds.each do |feed| %>
-      <tr>
-        <td><%= feed.title %></td>
-        <td><%= feed.description %></td>
-        <td><%= feed.url %></td>
-        <td><%= link_to 'Show', feed %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <section class="section">
+    <div class="container is-max-width-30em  animate__animated animate__slideInUp">
+      <h1 class="title">
+        Feeds
+      </h1>
+      <% current = '' %>
+      <% @feeds.order(:title).each_with_index do |feed, i| %>
+      <% if current != feed.title[0] %>
+      <% current = feed.title[0] %>
+      <% unless i == 0 %>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Feed', new_feed_path %>
+    <h1 class="title has-text-grey-light">
+      <%= current %>
+    </h1>
+    <div class="box">
+      <% end %>
+      <h2 class="subtitle has-icon">
+        <span class="icon">
+          <i class="fa fa-rss-square"></i>
+        </span>
+        <span>
+          <%= link_to feed, feed %>
+        </span>
+      </h2>
+      <% end %>
+    </div>
+    </div>
+  </section>

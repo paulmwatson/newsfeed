@@ -1,9 +1,41 @@
-<nav class="navbar is-fixed-bottom is-warning" role="navigation" aria-label="main navigation" data-turbolinks-animate-persist="true">
-  <div class="navbar-brand">
-    <%= render partial: '/items/profiles' %>
-    <% if @items %>
-    <%= render partial: '/items/time_ranges' %>
-    <% end %>
-    <%= render partial: '/shared/user' %>
+<nav class="navbar is-fixed-bottom is-transparent" role="navigation" aria-label="main navigation" data-turbolinks-animate-persist="true">
+  <div class="navbar-brand is-transparent">
+    <div class="dropdown is-hoverable navbar-item is-up is-margin-0-auto is-width-100percent is-max-width-30em">
+      <div class="dropdown-trigger is-width-100percent">
+        <button class="button has-icon is-width-100percent is-warning is-border-solid-2px-white-ter" aria-haspopup="true" aria-controls="dropdown-profiles">
+          <span class="icon is-pulled-left">
+            <i class="fas fa-list"></i>
+          </span>
+          <span class="is-width-100percent has-text-weight-bold">
+            <%= @profile && !@profile.new_record? ? @profile : t('common.newsfeed') %>
+          </span>
+          <span class="icon is-small is-pulled-right">
+            <i class="fas fa-angle-up" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu is-width-100percent" id="dropdown-profiles" role="menu">
+        <div class="dropdown-content is-border-solid-2px-white-ter">
+          <% if user_signed_in? %>
+          <% current_user.profiles.order(:name).each do |profile| %>
+          <%= link_to profile, profile_url(profile.id), class: "dropdown-item#{' has-text-weight-bold' if profile == @profile}" %>
+          <% end %>
+          <hr class="dropdown-divider">
+          <% if @items && @profile %>
+          <%= link_to t('common.edit_profile', list_name: @profile), edit_profile_url(@profile), class: 'dropdown-item' %>
+          <%= link_to t('common.delete_profile', list_name: @profile), @profile, method: :delete, data: {confirm: 'Are you sure?'}, class: 'dropdown-item has-text-danger' %>
+          <hr class="dropdown-divider">
+          <% end %>
+          <%= link_to t('common.new_profile'), new_profile_url, class: 'dropdown-item' %>
+          <hr class="dropdown-divider">
+          <%= link_to t('navigation.edit_account'), edit_user_registration_url(), class: 'dropdown-item' %>
+          <%= link_to t('navigation.sign_out'), :destroy_user_session, method: :delete, class: 'dropdown-item' %>
+          <%- else -%>
+          <%= link_to t('navigation.sign_in'), :new_user_session, class: 'dropdown-item' %>
+          <%= link_to t('navigation.sign_up'), :new_user_registration, class: 'dropdown-item' %>
+          <%- end -%>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>

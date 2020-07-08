@@ -26,3 +26,28 @@
 .is-height-1000px {
   height: 1000px;
 }
+
+.is-box-shadow-none {
+  box-shadow: none !important;
+}
+
+.is-border-radius-0 {
+  border-radius: 0;
+}
+
+.is-margin-0-auto {
+  margin: 0 auto;
+}
+
+.navbar {
+  &.is-transparent {
+    background-color: transparent !important;
+    .navbar-brand {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.is-border-solid-2px-white-ter {
+  border: solid 2px $white-ter !important;
+}

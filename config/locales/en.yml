@@ -6,16 +6,17 @@ en:
     sign_up: Sign Up
     sign_in: Sign In
   common:
+    delete_profile: Delete List
     feeds: feeds
     remove: Remove
     world_news: World News
+    newsfeed: Newsfeed
     or: or
     profile: list
     profiles: lists
     new_profile: New List
     edit_profile: Edit List
     profiles: Lists
-    edit_profile: Edit List
     new_profile: New List
     create_profile: Create List
     save_profile: Save List

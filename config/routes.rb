@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :profiles do
-    get '/items' => 'items#index', as: :items
-    delete '/feeds/:feed_id' => 'profiles#destroy_feed_profile', as: :feed_destroy
-  end
+  resources :profiles
   resources :items do
     get '/read' => 'items#read', as: :read
     get '/seen' => 'items#seen', as: :seen
   end
   resources :feeds
   devise_for :users
-  root 'items#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  authenticated :user do
+    root to: 'profiles#default', as: :authenticated_root
+  end
+
+  unauthenticated :user do
+    root 'items#index'
+  end
 end

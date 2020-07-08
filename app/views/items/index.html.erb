@@ -1,17 +1,5 @@
 <div class="container is-max-width-30em mt-5 animate__animated animate__slideInUp">
-  <% current_time_ago = 0 %>
-
-  <% @items.each do |item| %>
-
-  <% if current_time_ago != time_ago_in_words(item.published_at) %>
-  <div class="has-text-centered content">
-    <% current_time_ago = time_ago_in_words(item.published_at) %>
-    <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
-  </div>
-  <% end %>
-
-  <%= render partial: '/items/item', locals: {item: item} %>
-  <% end %>
+  <%= render partial: '/items/items', locals: {items: @items }%>
 
   <hr class="is-height-1000px">
   <p class="has-text-centered is-size-7 has-text-grey mb-1">

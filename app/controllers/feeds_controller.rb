@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: %i[show edit update destroy]
 
   # GET /feeds
   # GET /feeds.json
@@ -10,6 +12,8 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
+    @items = @feed.items.order(published_at: :desc).limit(100)
+    @seen_items = current_user.item_users.where(item: @items).pluck(:item_id) if current_user
   end
 
   # GET /feeds/new
@@ -18,8 +22,7 @@ class FeedsController < ApplicationController
   end
 
   # GET /feeds/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /feeds
   # POST /feeds.json
@@ -62,13 +65,14 @@ class FeedsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feed
-      @feed = Feed.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def feed_params
-      params.require(:feed).permit(:title, :description, :url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def feed_params
+    params.require(:feed).permit(:title, :description, :url)
+  end
 end

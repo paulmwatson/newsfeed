@@ -1,0 +1,13 @@
+<% current_time_ago = 0 %>
+
+<% items.each do |item| %>
+
+<% if current_time_ago != time_ago_in_words(item.published_at) %>
+<div class="has-text-centered content has-text-grey-light is-size-7 mb-1">
+  <% current_time_ago = time_ago_in_words(item.published_at) %>
+  <%= "#{current_time_ago} ago" %>
+</div>
+<% end %>
+
+<%= render partial: '/items/item', locals: {item: item} %>
+<% end %>
