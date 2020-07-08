@@ -81,7 +81,7 @@ class Feed < ApplicationRecord
     begin
       feed = Feedjira.parse(response)
       feed.entries.each do |entry|
-        new_items << items.where(url: entry.url).first_or_create(title: entry.title, body: entry.summary || entry.content, published_at: entry.published, original: entry.to_h)
+        new_items << items.where(url: entry.url).first_or_create(title: entry.title, body: entry.summary || entry.content, published_at: entry.published || Time.now, original: entry.to_h)
       end
       new_items
     rescue Feedjira::NoParserAvailable
