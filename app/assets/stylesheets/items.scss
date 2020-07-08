@@ -5,8 +5,8 @@
 @import 'bulma/sass/helpers/color';
 @import 'bulma/sass/components/card';
 
-.is-just-seen {
-  filter: grayscale(1);
+.is-seen {
+  box-shadow: none !important;
 }
 
 details.card {

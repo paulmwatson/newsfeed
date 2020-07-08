@@ -1,45 +1,23 @@
-  <div class="container is-max-width-30em mt-5">
-    <% current_time_ago = 0 %>
+<div class="container is-max-width-30em mt-5 animate__animated animate__slideInUp">
+  <% current_time_ago = 0 %>
 
-    <% @items.each do |item| %>
+  <% @items.each do |item| %>
 
-    <% seen = item.item_users.where(user: current_user).count > 0 %>
-    <% image = item.image %>
-
-    <% if current_time_ago != time_ago_in_words(item.published_at) %>
-    <div class="has-text-centered content">
-      <% current_time_ago = time_ago_in_words(item.published_at) %>
-      <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
-    </div>
-    <% end %>
-
-    <details data-item-id="<%= item.id %>" class="is-item card<%= ' is-seen' if seen %><%= ' has-image' if image %>" <%= 'open' unless seen %>>
-      <summary class="card-content">
-        <h2 class="subtitle">
-          <%= link_to item.title, item_read_url(item), target: '_blank', rel: "noopener" %>
-        </h2>
-      </summary>
-      <% if image %>
-      <div class="card-image mb-4 is-border-bottom-darker is-border-top-darker">
-        <figure class="image">
-          <img src="<%= image %>" alt="Image for <%= item.title %>" loading="lazy">
-        </figure>
-      </div>
-      <% end %>
-      <div class="card-content pt-0">
-        <%= link_to item.feed, item.feed, class: 'has-text-grey is-size-7 on-hover-has-text-link' %>
-        <div class="content">
-          <%= item.summary.html_safe %>
-        </div>
-      </div>
-    </details>
-    <br>
-    <% end %>
-    <hr class="is-height-1000px">
-    <p class="has-text-centered is-size-7 has-text-grey mb-1">
-      This is the end, beautiful friend<br>
-      This is the end, my only friend<br>
-      The end<br>
-      It hurts to set you free<br>
-    </p>
+  <% if current_time_ago != time_ago_in_words(item.published_at) %>
+  <div class="has-text-centered content">
+    <% current_time_ago = time_ago_in_words(item.published_at) %>
+    <%= link_to "#{current_time_ago} ago", item, class: 'has-text-grey-light on-hover-has-text-link is-size-7' %>
   </div>
+  <% end %>
+
+  <%= render partial: '/items/item', locals: {item: item} %>
+  <% end %>
+
+  <hr class="is-height-1000px">
+  <p class="has-text-centered is-size-7 has-text-grey mb-1">
+    This is the end, beautiful friend<br>
+    This is the end, my only friend<br>
+    The end<br>
+    It hurts to set you free<br>
+  </p>
+</div>

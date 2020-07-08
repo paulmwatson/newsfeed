@@ -27,4 +27,8 @@ class Item < ApplicationRecord
     end
     image_url
   end
+
+  def seen_by?(user)
+    item_users.where(user: user).count > 0
+  end
 end
