@@ -1,5 +1,9 @@
-.is-max-width-30em {
-  max-width: 30em;
+$max-widths: 10, 20, 25, 30, 40;
+
+@each $size in $max-widths {
+  .is-max-width-#{$size}em {
+    max-width: #{$size}em;
+  }
 }
 
 .on-hover-has-text-link:hover {
@@ -31,6 +35,10 @@
   box-shadow: none !important;
 }
 
+.is-box-shadow {
+  box-shadow: $box-shadow !important;
+}
+
 .is-border-radius-0 {
   border-radius: 0;
 }
@@ -50,4 +58,13 @@
 
 .is-border-solid-2px-white-ter {
   border: solid 2px $white-ter !important;
+}
+
+.is-overflow-x-hidden-ellipsis {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.is-justify-content-center {
+  justify-content: center !important;
 }
