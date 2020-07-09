@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/read' => 'items#read', as: :read
     get '/seen' => 'items#seen', as: :seen
   end
+  get '/feeds/fetch' => 'feeds#fetch'
   resources :feeds, only: %(show)
   devise_for :users
 

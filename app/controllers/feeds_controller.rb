@@ -10,6 +10,10 @@ class FeedsController < ApplicationController
     @seen_items = current_user.item_users.where(item: @items).pluck(:item_id) if current_user
   end
 
+  def fetch
+    render json: Feed.all.each(&:fetch)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
