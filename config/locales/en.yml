@@ -1,21 +1,26 @@
 en:
-  navigation:
+  navigation: 
+    your_profiles: Your Lists
+    about: About Newsfeed
+    personalise: Personalise
     home: Home
-    edit_account: Edit Account
+    edit_account: Edit Your Account
     sign_out: Sign Out
     sign_up: Sign Up
     sign_in: Sign In
+    world_news: World News
   common:
-    delete_profile: Delete List
+    delete: Delete
+    edit: Edit
+    delete_profile: 'Delete %{profile_name}'
     feeds: feeds
     remove: Remove
-    world_news: World News
     newsfeed: Newsfeed
     or: or
     profile: list
     profiles: lists
     new_profile: New List
-    edit_profile: Edit List
+    edit_profile: 'Edit %{profile_name}'
     profiles: Lists
     new_profile: New List
     create_profile: Create List

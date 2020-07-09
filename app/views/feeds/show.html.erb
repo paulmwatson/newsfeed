@@ -1,20 +1,9 @@
-<div class="container is-max-width-30em mt-5 animate__animated animate__slideInUp">
-
-  <div class="box">
-    <h1 class="title">
-      <span class="icon">
-        <i class="fa fa-rss-square"></i>
-      </span>
-      <span>
-        <%= @feed.title %>
-      </span>
-    </h1>
-    <p>
-      <%= link_to @feed.url, @feed.url, target: '_blank', rel: 'noopener' %>
-    </p>
+<h1 class="title is-size-5 mb-0 has-text-centered has-background-warning pt-4 pb-4 is-box-shadow">
+  <%= @feed.title %>
+</h1>
+<section class="section pt-4 px-2">
+  <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+    <%= render partial: '/items/items', locals: {items: @items } %>
+    <hr class="is-height-1000px">
   </div>
-
-  <%= render partial: '/items/items', locals: {items: @items } %>
-  <hr class="is-height-1000px">
-
-</div>
+</section>

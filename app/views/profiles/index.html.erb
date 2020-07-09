@@ -1,29 +1,21 @@
-<section class="section">
-  <div class="container is-max-width-30em animate__animated animate__slideInUp">
-    <h1 class="title">
-      Your Lists
-    </h1>
-    <% current = '' %>
+<h1 class="title is-size-5 mb-0 has-text-centered has-background-warning pt-4 pb-4">
+  Your Lists
+</h1>
+
+<table class="table is-hoverable is-striped has-sticky-header is-width-100percent">
+  <tbody>
     <% @profiles.order(:name).each_with_index do |profile, i| %>
-    <% if current != profile.name[0] %>
-    <% current = profile.name[0] %>
-    <% unless i == 0 %>
-  </div>
-  <% end %>
-  <h1 class="title has-text-grey-light">
-    <%= current %>
-  </h1>
-  <div class="box">
+    <tr>
+      <td width="99%">
+        <%= link_to profile, profile, class: 'is-size-5' %>
+      </td>
+      <td class="is-vertical-align-middle">
+        <%= link_to t('common.edit'), edit_profile_url(profile), class: 'button is-small is-link' %>
+      </td>
+      <td class="is-vertical-align-middle">
+        <%= link_to t('common.delete'), profile, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button is-small is-danger' %>
+      </td>
+    </tr>
     <% end %>
-    <h2 class="subtitle has-icon">
-      <span class="icon">
-        <i class="fa fa-list-alt"></i>
-      </span>
-      <span>
-        <%= link_to profile, profile %>
-      </span>
-    </h2>
-    <% end %>
-  </div>
-  </div>
-</section>
+  </tbody>
+</table>

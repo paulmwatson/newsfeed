@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    @menu_text = I18n.t('navigation.personalise')
     @items = Item.includes(:feed).order(published_at: :desc).limit(100)
   end
 

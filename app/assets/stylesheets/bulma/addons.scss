@@ -68,3 +68,19 @@ $max-widths: 10, 20, 25, 30, 40;
 .is-justify-content-center {
   justify-content: center !important;
 }
+
+.is-z-index-1 {
+  z-index: 1;
+}
+
+.is-vertical-align-middle {
+  vertical-align: middle !important;
+}
+
+.is-text-underline {
+  text-decoration: underline;
+}
+
+.is-border-top-solid-2px-warning {
+  border-top: solid 2px $warning;
+}

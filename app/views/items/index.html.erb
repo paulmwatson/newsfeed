@@ -1,3 +1,8 @@
+<section class="section has-background-dark has-text-white pt-4 pb-4 px-4 is-size-5 is-border-top-solid-2px-warning">
+  <div class="container is-max-width-25em">
+    Welcome to Newsfeed, a Really Simple Newsreader for RSS. Catch up on World News below or go ahead and <%= link_to 'personalise it', :new_user_registration, class: 'has-text-warning is-text-underline' %>.
+  </div>
+</section>
 <section class="section pt-2 px-2">
   <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
     <%= render partial: '/items/items', locals: {items: @items }%>

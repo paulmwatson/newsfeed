@@ -17,6 +17,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @menu_text = @profile
     @time_range = (params[:time_range] || 24).to_i
     @items = Item.includes(:feed, :item_users).where(feed_id: @profile.feed_ids).where('published_at > ?', (Time.now - @time_range.hours)).order(published_at: :desc)
     @seen_items = current_user.item_users.where(item: @items).pluck(:item_id)
