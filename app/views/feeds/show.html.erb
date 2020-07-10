@@ -1,9 +1,9 @@
-<h1 class="title is-size-5 mb-0 has-text-centered has-background-warning pt-4 pb-4 is-box-shadow">
+<h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow">
   <%= @feed.title %>
 </h1>
-<section class="section pt-4 px-2">
-  <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+<div class="container is-max-width-25em mt-2 animate__animated animate__slideInUp">
+  <section class="section pt-4 px-2">
     <%= render partial: '/items/items', locals: {items: @items } %>
-    <hr class="is-height-1000px">
-  </div>
-</section>
+    <%= render partial: '/shared/bottom_buffer' %>
+  </section>
+</div>

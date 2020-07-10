@@ -17,10 +17,6 @@
           <%= link_to t('navigation.sign_out'), :destroy_user_session, method: :delete, class: 'dropdown-item' %>
           <hr class="dropdown-divider">
           <%= link_to t('common.new_profile'), new_profile_url, class: 'dropdown-item has-text-success' %>
-          <% if @items && @profile %>
-          <%= link_to t('common.edit_profile', profile_name: @profile), edit_profile_url(@profile), class: 'dropdown-item has-text-link is-overflow-x-hidden-ellipsis' %>
-          <%= link_to t('common.delete_profile', profile_name: @profile), @profile, method: :delete, data: {confirm: 'Are you sure?'}, class: 'dropdown-item has-text-danger is-overflow-x-hidden-ellipsis' %>
-          <% end %>
           <%= link_to t('navigation.your_profiles'), profiles_url(), class: 'dropdown-item' %>
           <hr class="dropdown-divider">
           <% current_user.profiles.order(default: :desc).order(:name).limit(8).each do |profile| %>

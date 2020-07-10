@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>" class="has-background-white-ter has-navbar-fixed-bottom">
+<html lang="<%= I18n.locale %>" class="has-background-white-ter has-navbar-fixed-bottom<%= ' is-signed-in' if user_signed_in? %>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Newsfeed</title>
+  <title><%= "#{@menu_text} - " if @menu_text && @menu_text != 'Newsfeed' %>Newsfeed</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -17,6 +17,10 @@
 <body>
   <%= yield %>
   <%= render partial: '/shared/navigation' %>
+  <%- if alert || notice -%>
+  <div data-controller="toast" data-toast-type="<%= alert ? 'alert' : 'notice' %>"><%= alert || notice %></div>
+  <%- end -%>
+  <div class="is-position-fixed-top-0 is-border-top-solid-2px-primary" aria-hidden="true"></div>
 </body>
 
 </html>

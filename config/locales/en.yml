@@ -1,4 +1,32 @@
 en:
+  info:
+    password_minimum: '%{minimum} characters minimum'
+  fields:
+    new_password: New password
+    your_email: 'Your email address:'
+  buttons:
+    sign_up: Sign Up
+    sign_in: Sign In
+    forgot_password: Forgot password?
+    save: Save
+    update: Update
+    cancel_account: Cancel Your Account
+    confirm_account: Confirm Your Account
+    send_password_reset: Send me reset password instructions
+    change_password: Change your password
+    save_new_password: Save New Password
+  headings:
+    about_newsfeed: About Newsfeed
+    your_lists: Your Lists
+    forgot_password: Forgot your password?
+    test_it: Test It
+    sign_in: Sign In
+    sign_up: Sign Up
+    cancel_account: Cancel Account
+    confirm_account: Confirm Your Account
+    forgot_password: Forgot Your Password?
+    change_password: Change Your Password
+    edit_account: Edit Your Account
   navigation: 
     your_profiles: Your Lists
     about: About Newsfeed
@@ -10,6 +38,8 @@ en:
     sign_in: Sign In
     world_news: World News
   common:
+    cancel: Cancel
+    are_you_sure: Are you sure?
     delete: Delete
     edit: Edit
     delete_profile: 'Delete %{profile_name}'
@@ -25,6 +55,8 @@ en:
     new_profile: New List
     create_profile: Create List
     save_profile: Save List
+  copy:
+    cancel_account: 'You can cancel your account at any time. All your personal data will be immediately removed from our systems. This cannot be undone.'
   datetime:
     distance_in_words:
       about_x_hours:

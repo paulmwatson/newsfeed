@@ -4,7 +4,9 @@ const checkItemsSeen = () => {
   if (!ticking) {
     ticking = true
     const windowScrollY = window.scrollY
-    for (let item of document.querySelectorAll('.is-item:not(.is-seen)')) {
+    for (let item of document.querySelectorAll(
+      '.is-signed-in .is-item:not(.is-seen)'
+    )) {
       const itemOffsetTop = item.offsetTop
       if (itemOffsetTop < windowScrollY) {
         item.classList.add('is-seen')

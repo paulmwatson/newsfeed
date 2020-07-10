@@ -1,18 +1,15 @@
-<section class="section has-background-dark has-text-white pt-4 pb-4 px-4 is-size-5 is-border-top-solid-2px-warning">
-  <div class="container is-max-width-25em">
-    Welcome to Newsfeed, a Really Simple Newsreader for RSS. Catch up on World News below or go ahead and <%= link_to 'personalise it', :new_user_registration, class: 'has-text-warning is-text-underline' %>.
+<% unless user_signed_in? %>
+<section class="section pt-4 pb-4 px-4 is-size-5">
+  <div class="container is-max-width-25em content has-text-centered">
+    <p>
+      Welcome to Newsfeed, a Really Simple Newsreader for RSS. Catch up on World News or go ahead and <%= link_to 'personalise it', :new_user_registration, class: 'is-text-underline' %>.
+    </p>
   </div>
 </section>
+<% end %>
 <section class="section pt-2 px-2">
   <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
     <%= render partial: '/items/items', locals: {items: @items }%>
-
-    <hr class="is-height-1000px">
-    <p class="has-text-centered is-size-7 has-text-grey mb-1">
-      This is the end, beautiful friend<br>
-      This is the end, my only friend<br>
-      The end<br>
-      It hurts to set you free<br>
-    </p>
+    <%= render partial: '/shared/bottom_buffer' %>
   </div>
 </section>

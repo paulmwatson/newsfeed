@@ -84,3 +84,13 @@ $max-widths: 10, 20, 25, 30, 40;
 .is-border-top-solid-2px-warning {
   border-top: solid 2px $warning;
 }
+
+.is-border-top-solid-2px-primary {
+  border-top: solid 2px $primary;
+}
+
+.is-position-fixed-top-0 {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}

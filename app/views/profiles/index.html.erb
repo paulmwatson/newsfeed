@@ -1,7 +1,6 @@
-<h1 class="title is-size-5 mb-0 has-text-centered has-background-warning pt-4 pb-4">
-  Your Lists
+<h1 class="title is-size-5 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow">
+  <%= t('headings.your_lists') %>
 </h1>
-
 <table class="table is-hoverable is-striped has-sticky-header is-width-100percent">
   <tbody>
     <% @profiles.order(:name).each_with_index do |profile, i| %>

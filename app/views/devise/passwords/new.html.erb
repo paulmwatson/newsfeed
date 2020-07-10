@@ -1,16 +1,21 @@
-<h2>Forgot your password?</h2>
+<h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow">
+  <%= t('headings.forgot_password') %>
+</h1>
+<div class="container is-max-width-25em">
+  <section class="section">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <div class="field">
+      <%= f.label :email, class: 'label' %>
+      <%= render 'shared/field_error', errors: resource.errors[:email] %>
+      <div class="control">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <div class="actions">
+      <%= f.submit t('buttons.send_password_reset'), class: 'button is-info is-pulled-right' %>
+    </div>
+    <% end %>
+  </section>
+</div>

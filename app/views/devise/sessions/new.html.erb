@@ -1,29 +1,36 @@
-<section class="section">
-  <h2>Log in</h2>
+<h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow">
+  <%= t('headings.sign_in') %>
+</h1>
+<div class="container is-max-width-25em">
+  <section class="section">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'has-text-left'}) do |f| %>
+    <div class="field">
+      <%= f.label :email, class: 'label' %>
+      <div class="control">
+        <%= f.email_field :email, autocomplete: 'email', class: 'input' %>
+      </div>
+    </div>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field">
+      <%= f.label :password, class: 'label' %>
+      <div class="control">
+        <%= f.password_field :password, autocomplete: 'current-password', class: 'input' %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <div class="level">
+      <div class="level-start">
+        <div class="level-item">
+          <%= link_to t('buttons.forgot_password'), new_password_path(resource_name), class: 'is-text-underline' %>
+        </div>
+      </div>
+      <div class="level-end">
+        <div class="level-item">
+          <%= f.submit t('navigation.sign_in'), class: 'button is-success is-pulled-right' %>
+        </div>
+      </div>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-  <div class="field">
-    <%= f.check_box :remember_me %>
-    <%= f.label :remember_me %>
-  </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
-
-</section>
+    <% end %>
+  </section>
+</div>
