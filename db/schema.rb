@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_150156) do
+ActiveRecord::Schema.define(version: 2020_07_10_152249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 2020_07_08_150156) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "default", default: false, null: false
+    t.boolean "show_images", default: true, null: false
+    t.boolean "show_read_items", default: true, null: false
+    t.integer "last_hours", default: 24, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

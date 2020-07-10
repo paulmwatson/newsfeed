@@ -94,3 +94,16 @@ $max-widths: 10, 20, 25, 30, 40;
   top: 0;
   width: 100%;
 }
+
+.is-border-bottom-solid-2px-grey-lighter {
+  border-bottom: solid 2px $grey-lighter;
+}
+
+.has-background-transparent {
+  background-color: transparent;
+}
+
+.is-box-shadow-inset {
+  //box-shadow: inset 0px -11px 8px -10px rgba($scheme-invert, 0.1);
+  box-shadow: inset 0 -11px 8px -10px rgba($scheme-invert, 0.1);
+}

@@ -1,10 +1,10 @@
-<details data-item-id="<%= item.id %>" class="is-item mb-5 card<%= ' is-seen' if (@seen_items&.include? item.id) %><%= ' has-image' if item.image %>" <%= 'open' unless (@seen_items&.include? item.id) %>>
+<details data-item-id="<%= item.id %>" class="is-item mb-5 card<%= ' is-seen' if (@seen_items&.include? item.id) %><%= ' has-image' if @show_images && item.image %>" <%= 'open' unless (@seen_items&.include? item.id) %>>
   <summary class="card-content">
     <h2 class="subtitle">
       <%= link_to item.title, item_read_url(item), target: '_blank', rel: 'noopener' %>
     </h2>
   </summary>
-  <% if item.image %>
+  <% if @show_images && item.image %>
   <div class="card-image mb-4 is-border-bottom-darker is-border-top-darker">
     <figure class="image">
       <img src="<%= item.image %>" alt="Image for <%= item.title %>" loading="lazy">

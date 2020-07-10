@@ -1,6 +1,12 @@
 <section class="section pt-2 px-2">
   <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+    <% if @items.empty? %>
+    <p class="has-text-centered has-text-grey pt-5 is-size-5">
+      <%= t('info.no_items') %>
+    </p>
+    <% else %>
     <%= render partial: '/items/items', locals: {items: @items }%>
     <%= render partial: '/shared/bottom_buffer' %>
+    <% end %>
   </div>
 </section>

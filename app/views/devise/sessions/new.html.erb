@@ -1,7 +1,7 @@
-<h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow">
+<h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow-inset">
   <%= t('headings.sign_in') %>
 </h1>
-<div class="container is-max-width-25em">
+<div class="container is-max-width-30em">
   <section class="section">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'has-text-left'}) do |f| %>
     <div class="field">
@@ -18,17 +18,9 @@
       </div>
     </div>
 
-    <div class="level">
-      <div class="level-start">
-        <div class="level-item">
-          <%= link_to t('buttons.forgot_password'), new_password_path(resource_name), class: 'is-text-underline' %>
-        </div>
-      </div>
-      <div class="level-end">
-        <div class="level-item">
-          <%= f.submit t('navigation.sign_in'), class: 'button is-success is-pulled-right' %>
-        </div>
-      </div>
+    <div>
+      <%= link_to t('buttons.forgot_password'), new_password_path(resource_name), class: 'button' %>
+      <%= f.submit t('navigation.sign_in'), class: 'button is-success is-pulled-right' %>
     </div>
 
     <% end %>

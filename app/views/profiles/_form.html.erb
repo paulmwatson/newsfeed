@@ -1,15 +1,4 @@
 <%= form_with(model: profile, local: true) do |form| %>
-<% if profile.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
-  <ul>
-    <% profile.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
 
 <div class="field">
   <label class="label">Give your list a name:</label>
@@ -28,42 +17,29 @@
 
 <div class="field">
   <label class="checkbox">
-    <%= form.check_box :default %>
+    <%= form.check_box :show_images %>
     Show images
   </label>
 </div>
 
 <div class="field">
   <label class="checkbox">
-    <%= form.check_box :default %>
-    Show read items
+    <%= form.check_box :show_read_items %>
+    Show items you've already seen or read
   </label>
 </div>
 
 <label class="label">
   Show items from the:
 </label>
+<% Profile.last_hours.each do |last_hour| %>
 <div class="field">
   <label class="checkbox">
-    <%= form.radio_button :default, 'asd' %>
-    Last 24 hours
+    <%= form.radio_button :last_hours, last_hour, checked: @profile.last_hours == last_hour %>
+    <%= t("last_hours.#{last_hour}") %>
   </label>
 </div>
-<div class="field">
-  <label class="checkbox">
-    <%= form.radio_button :default, 'asd' %>
-    Last 3 days (covers weekends)
-  </label>
-</div>
-<div class="field">
-  <label class="checkbox">
-    <%= form.radio_button :default, 'asd' %>
-    Last year
-  </label>
-</div>
-
-
-
+<% end %>
 <hr>
 <label class="label">
   Select the feeds you want in your list:

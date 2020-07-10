@@ -4,8 +4,8 @@ en:
   devise:
     failure:
       already_authenticated: 'You are signed in'
-      invalid: 'Wrong %{authentication_keys} or password'
-      not_found_in_database: 'Wrong %{authentication_keys} or password'
+      invalid: 'Wrong email or password'
+      not_found_in_database: 'Wrong email or password'
       timeout: 'Please sign in again'
       unauthenticated: 'You need to please sign in'
     mailer:
@@ -23,7 +23,6 @@ en:
       destroyed: 'Your account has been cancelled, we hope to see you again soon'
       signed_up: ''
       updated: 'Your account has been updated'
-      updated_but_not_signed_in: 'Your account has been updated successfully, but since your password was changed, you need to sign in again'
     sessions:
       signed_in: ''
       signed_out: 'Signed out, see you soon'

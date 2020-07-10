@@ -1,5 +1,10 @@
 en:
+  last_hours:
+    '24': Last day
+    '72': Last 3 days (covers weekends)
+    '8760': Last year
   info:
+    no_items: No new items to read, and that's OK.
     password_minimum: '%{minimum} characters minimum'
   fields:
     new_password: New password
@@ -16,6 +21,8 @@ en:
     change_password: Change your password
     save_new_password: Save New Password
   headings:
+    edit_profile: Edit List
+    new_profile: New List
     about_newsfeed: About Newsfeed
     your_lists: Your Lists
     forgot_password: Forgot your password?

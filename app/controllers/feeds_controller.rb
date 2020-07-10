@@ -6,6 +6,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
+    @show_images = true
     @items = @feed.items.order(published_at: :desc).limit(100)
     @seen_items = current_user.item_users.where(item: @items).pluck(:item_id) if current_user
   end

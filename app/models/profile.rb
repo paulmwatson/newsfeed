@@ -12,4 +12,8 @@ class Profile < ApplicationRecord
   def to_s
     name
   end
+
+  def self.last_hours
+    [24, 72, 8760]
+  end
 end
