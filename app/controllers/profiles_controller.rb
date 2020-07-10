@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = current_user.profiles
+    @profiles = current_user.profiles.order(:name)
   end
 
   # GET /profiles/1

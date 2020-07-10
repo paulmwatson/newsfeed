@@ -1,22 +1,24 @@
 <h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow-inset">
   <%= t('headings.your_lists') %>
 </h1>
-<div class="container  is-max-width-30em">
-  <table class="table has-background-transparent is-width-100percent is-border-bottom-solid-2px-grey-lighter">
-    <tbody>
-      <% @profiles.order(:name).each_with_index do |profile, i| %>
-      <tr>
-        <td width="99%">
-          <%= link_to profile, profile, class: 'is-size-5' %>
-        </td>
-        <td class="is-vertical-align-middle">
-          <%= link_to t('common.edit'), edit_profile_url(profile), class: 'button is-small is-link' %>
-        </td>
-        <td class="is-vertical-align-middle">
-          <%= link_to t('common.delete'), profile, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button is-small is-danger' %>
-        </td>
-      </tr>
+<div class="container is-max-width-30em px-2">
+  <% @profiles.each do |profile| %>
+  <div class="card mt-4">
+    <header class="card-header">
+      <p class="card-header-title">
+        <%= link_to profile, profile %>
+      </p>
+      <%= link_to edit_profile_url(profile), class: 'card-header-icon' do %>
+      <span class="icon">
+        <i class="fas fa-edit" aria-hidden="true"></i>
+      </span>
       <% end %>
-    </tbody>
-  </table>
+      <%= link_to profile, method: :delete, data: {confirm: t('common.are_you_sure')}, class: 'card-header-icon has-text-danger' do %>
+      <span class="icon">
+        <i class="far fa-trash-alt" aria-hidden="true"></i>
+      </span>
+      <% end %>
+    </header>
+  </div>
+  <% end %>
 </div>

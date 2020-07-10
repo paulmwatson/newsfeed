@@ -45,6 +45,7 @@ en:
     sign_in: Sign In
     world_news: World News
   common:
+    view: View
     cancel: Cancel
     are_you_sure: Are you sure?
     delete: Delete
