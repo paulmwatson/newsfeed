@@ -1,0 +1,22 @@
+{
+  "name": "Newsfeed - Really Simple RSS Newsreader",
+  "short_name": "Newsfeed",
+  "description": "A Really Simple RSS (and ATOM) Newsreader",
+  "start_url": "https://newsfeed.paulmwatson.com/",
+  "icons": [
+    {
+      "src": "/images/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "lang": "English",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/"
+}
