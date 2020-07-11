@@ -17,7 +17,7 @@ class Feed < ApplicationRecord
 
     begin
       puts("#{tries}: Importing #{url}")
-      response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 1.hour) do
+      response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 15.minutes) do
         URI.open(url, redirect: false).read
       end
     rescue OpenURI::HTTPRedirect => e
@@ -50,7 +50,7 @@ class Feed < ApplicationRecord
 
     begin
       puts("#{tries}: Importing #{url}")
-      response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 1.hour) do
+      response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 15.minutes) do
         URI.open(url, redirect: false).read
       end
     rescue OpenURI::HTTPRedirect => e
