@@ -1,6 +1,6 @@
 {
   "name": "Newsfeed",
-  "shortname": "Newsfeed",
+  "short_name": "Newsfeed",
   "description": "A Really Simple RSS (and ATOM) Newsreader",
   "start_url": "https://newsfeed.paulmwatson.com/",
   "icons": [
