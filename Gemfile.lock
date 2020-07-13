@@ -60,6 +60,22 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     animate-css-rails (3.5.2)
     ast (2.4.1)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.341.0)
+    aws-sdk-core (3.103.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.36.0)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.74.0)
+      aws-sdk-core (~> 3, >= 3.102.1)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.2.1)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.6)
@@ -92,6 +108,7 @@ GEM
     erubi (1.9.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    fastimage (2.1.7)
     feedjira (3.1.1)
       loofah (>= 2.3.1)
       sax-machine (>= 1.0)
@@ -108,6 +125,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     jwt (2.2.1)
     kwalify (0.7.2)
     launchy (2.5.0)
@@ -126,6 +144,7 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
     mimemagic (0.3.5)
+    mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
@@ -300,12 +319,14 @@ PLATFORMS
 
 DEPENDENCIES
   animate-css-rails
+  aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
   devise
   dotenv-rails
+  fastimage
   feedjira
   font-awesome-sass (~> 5.13.0)
   hashie
@@ -313,6 +334,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.2)
+  mini_magick
   omniauth-google-oauth2
   opmlparser
   pg (>= 0.18, < 2.0)

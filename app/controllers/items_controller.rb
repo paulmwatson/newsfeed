@@ -28,7 +28,9 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   # GET /items/1.json
-  def show; end
+  def show
+    @show_images = true
+  end
 
   # GET /items/new
   def new

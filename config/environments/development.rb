@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.hosts << ENV['HOST']
   config.force_ssl = true
   config.action_view.raise_on_missing_translations = true
-  
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -22,7 +24,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
-    config.cache_store = :memory_store
+    config.cache_store = :file_store, '/tmp/cache'
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }

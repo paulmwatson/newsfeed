@@ -26,9 +26,13 @@ details.card {
       color: grey;
       pointer-events: none;
     }
+
+    .is-hidden-closed {
+      display: none;
+    }
   }
 
-  &[open]:not(.has-image) summary {
+  &[open]:not(.has-main-image) summary {
     padding-bottom: 0;
   }
 

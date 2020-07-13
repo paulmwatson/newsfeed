@@ -41,6 +41,12 @@ gem 'opmlparser'
 
 gem 'hashie'
 
+gem 'fastimage'
+
+gem 'mini_magick'
+
+gem 'aws-sdk-s3', require: false
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

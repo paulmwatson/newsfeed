@@ -1,29 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @item.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @item.body %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @item.url %>
-</p>
-
-<p>
-  <strong>Feed:</strong>
-  <%= @item.feed_id %>
-</p>
-
-<p>
-  <strong>Published at:</strong>
-  <%= @item.published_at %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<section class="section pt-2 px-2">
+  <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+    <div class="has-text-centered content has-text-grey-light is-size-7 mb-1">
+      <%= "#{time_ago_in_words(@item.published_at)} ago" %>
+    </div>
+    <%= render partial: '/items/item', locals: {item: @item }%>
+  </div>
+</section>

@@ -104,6 +104,17 @@ $max-widths: 10, 20, 25, 30, 40;
 }
 
 .is-box-shadow-inset {
-  //box-shadow: inset 0px -11px 8px -10px rgba($scheme-invert, 0.1);
   box-shadow: inset 0 -11px 8px -10px rgba($scheme-invert, 0.1);
+}
+
+.is-width-64px {
+  width: 64px !important;
+}
+
+.is-max-height-96px {
+  max-height: 96px !important;
+}
+
+.is-max-width-96px {
+  max-width: 128px !important;
 }
