@@ -1,0 +1,7 @@
+<section class="section pt-2 px-2">
+  <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+    <% @items.each do |item| %>
+    <%= render partial: '/items/item', locals: {item: item} %>
+    <% end %>
+  </div>
+</section>

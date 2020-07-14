@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get '/seen' => 'items#seen', as: :seen
   end
 
-  resources :feeds, only: %(show) do
+  resources :feeds, only: %i[show index] do
     get 'fetch' => 'feeds#fetch', on: :collection
   end
 

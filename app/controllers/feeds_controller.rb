@@ -3,6 +3,11 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: %i[show edit update destroy]
 
+  def index
+    @show_images = true
+    @items = Feed.order(title: :asc).all.collect { |feed| feed.items.order(published_at: :desc).first }
+  end
+
   # GET /feeds/1
   # GET /feeds/1.json
   def show
