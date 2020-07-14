@@ -21,7 +21,10 @@ class Item < ApplicationRecord
     uris = []
     original_extended = original.to_h.extend Hashie::Extensions::DeepFind
     urls << original_extended.deep_find('image')
-    urls << (original['content'] || original['summary']).scan(/<img[^>]+src="([^">]+)"/)
+    urls << original['content']&.scan(/<img[^>]+src="([^">]+)"/)
+    urls << original['summary']&.scan(/<img[^>]+src="([^">]+)"/)
+    urls << original['description']&.scan(/<img[^>]+src="([^">]+)"/)
+    urls << original['content:encoded']&.scan(/<img[^>]+src="([^">]+)"/)
     urls << html.scan(/<img[^>]+src="([^">]+)"/)
     urls << html.scan(/<meta[^>]+property="og:image"[^>]+content="([^">]+)"/)
     urls.flatten.uniq.compact.each do |url|
