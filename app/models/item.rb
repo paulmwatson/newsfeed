@@ -18,27 +18,40 @@ class Item < ApplicationRecord
 
   def image_urls
     urls = []
+    uris = []
     original_extended = original.to_h.extend Hashie::Extensions::DeepFind
     urls << original_extended.deep_find('image')
     urls << (original['content'] || original['summary']).scan(/<img[^>]+src="([^">]+)"/)
     urls << html.scan(/<img[^>]+src="([^">]+)"/)
-    urls.flatten.uniq.compact
+    urls << html.scan(/<meta[^>]+property="og:image"[^>]+content="([^">]+)"/)
+    urls.flatten.uniq.compact.each do |url|
+      uri = URI.parse(url)
+      uri.host = feed.url_host unless uri.host
+      uri.scheme = feed.url_scheme unless uri.scheme
+      uris << uri
+    end
+    uris.collect(&:to_s)
   end
 
-  def image_url_sizes
-    sizes = {}
+  def image_url_sizes_and_extension
+    urls = []
     unless image_urls.empty?
       image_urls.each do |url|
-        sizes[url] = Rails.cache.fetch("image_size_#{Digest::MD5.hexdigest(url)}") do
+        url_metadata = { url: url }
+        url_metadata[:size] = Rails.cache.fetch("image_size_#{Digest::MD5.hexdigest(url)}") do
           FastImage.size(url)
         end
+        url_metadata[:extension] = Rails.cache.fetch("image_type_#{Digest::MD5.hexdigest(url)}") do
+          FastImage.type(url)
+        end
+        urls << url_metadata
       end
     end
-    sizes
+    urls
   end
 
   def largest_main_image
-    image_url_sizes.max_by { |url| url[1] ? url[1][0] : 0 }.flatten
+    image_url_sizes_and_extension.keep_if { |url| %i[jpg png jpeg gif].include? url[:extension] }.max_by { |url| url[:size][0] }
   rescue StandardError
     nil
   end
@@ -53,14 +66,13 @@ class Item < ApplicationRecord
 
   def reattach_main_image
     main_image.detach
-    if largest_main_image && largest_main_image[1] > 100 && largest_main_image[2] > 50
-      url_to_use = largest_main_image[0]
+    if largest_main_image && largest_main_image[:size][0] > 100 && largest_main_image[:size][1] > 50
+      url_to_use = largest_main_image[:url]
       require 'open-uri'
       image = StringIO.new(Rails.cache.fetch("image_#{Digest::MD5.hexdigest(url_to_use)}") do
         URI.open(url_to_use).read
       end)
-      image_extension = FastImage.type(image).to_s
-      file_name = "#{id}_main_image.#{image_extension}"
+      file_name = "#{id}_main_image.#{largest_main_image[:extension]}"
       main_image.attach(io: image, filename: file_name)
       main_image.variant(resize: '400x').processed # Note: Eager loads the variant file to S3 so we can use .service_url later
       main_image.variant(resize: '150x').processed
@@ -69,6 +81,8 @@ class Item < ApplicationRecord
 
   def main_image_width
     main_image.metadata[:width]
+  rescue StandardError
+    0
   end
 
   def set_html

@@ -88,4 +88,12 @@ class Feed < ApplicationRecord
       nil
     end
   end
+
+  def url_host
+    URI.parse(url).host
+  end
+
+  def url_scheme
+    URI.parse(url).scheme
+  end
 end
