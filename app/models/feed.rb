@@ -75,7 +75,7 @@ class Feed < ApplicationRecord
 
   def fetch
     new_items = []
-    response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}", skip_nil: true, expires: 1.hour) do
+    response = Rails.cache.fetch("url_#{Digest::MD5.hexdigest(url)}_new", skip_nil: true, expires: 1.hour) do
       URI.open(url, redirect: false).read
     end
     begin

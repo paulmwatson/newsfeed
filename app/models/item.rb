@@ -4,11 +4,11 @@ class Item < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
 
   has_many :item_users, dependent: :destroy
-  has_one_attached :main_image
+  has_one_attached :main_image, acl: :public
 
   belongs_to :feed
 
-  after_create :attach_main_image
+  after_commit :get_html_and_main_image
 
   def summary(length = 300)
     sanitized = sanitize(body, tags: %w[p br ul li blockquote], attributes: %w[]).gsub('Read more', '').gsub('Continue reading', '').gsub('&hellip;', '').gsub('<blockquote>', '<p>').gsub('</blockquote>', '</p>').gsub('…', '').gsub('<p></p>', '')
@@ -21,6 +21,7 @@ class Item < ApplicationRecord
     original_extended = original.to_h.extend Hashie::Extensions::DeepFind
     urls << original_extended.deep_find('image')
     urls << (original['content'] || original['summary']).scan(/<img[^>]+src="([^">]+)"/)
+    urls << html.scan(/<img[^>]+src="([^">]+)"/)
     urls.flatten.uniq.compact
   end
 
@@ -37,7 +38,7 @@ class Item < ApplicationRecord
   end
 
   def largest_main_image
-    image_url_sizes.max_by { |url| url[0] }.flatten
+    image_url_sizes.max_by { |url| url[1] ? url[1][0] : 0 }.flatten
   rescue StandardError
     nil
   end
@@ -51,7 +52,7 @@ class Item < ApplicationRecord
   end
 
   def reattach_main_image
-    main_image.detach if main_image.attached?
+    main_image.detach
     if largest_main_image && largest_main_image[1] > 100 && largest_main_image[2] > 50
       url_to_use = largest_main_image[0]
       require 'open-uri'
@@ -61,10 +62,26 @@ class Item < ApplicationRecord
       image_extension = FastImage.type(image).to_s
       file_name = "#{id}_main_image.#{image_extension}"
       main_image.attach(io: image, filename: file_name)
+      main_image.variant(resize: '400x').processed # Note: Eager loads the variant file to S3 so we can use .service_url later
+      main_image.variant(resize: '150x').processed
     end
   end
 
   def main_image_width
     main_image.metadata[:width]
+  end
+
+  def set_html
+    if html.empty?
+      url_html = Rails.cache.fetch("html_#{Digest::MD5.hexdigest(url)}") do
+        URI.open(url).read
+      end
+      update(html: url_html)
+    end
+  end
+
+  def get_html_and_main_image
+    set_html
+    attach_main_image
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_120816) do
+ActiveRecord::Schema.define(version: 2020_07_13_204442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_120816) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.jsonb "original", default: {}, null: false
+    t.text "html", default: "", null: false
     t.index ["feed_id"], name: "index_items_on_feed_id"
   end
 

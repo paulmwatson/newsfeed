@@ -123,6 +123,9 @@ GEM
       rainbow (>= 2.0.0)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
+    image_processing (1.11.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -253,6 +256,8 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.10.1)
+    ruby-vips (2.0.17)
+      ffi (~> 1.9)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -331,6 +336,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5.13.0)
   hashie
   httplog
+  image_processing (~> 1.2)
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.2)

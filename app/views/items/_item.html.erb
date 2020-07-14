@@ -3,7 +3,7 @@
     <h2 class="subtitle">
       <% if @show_images && item.main_image.attached? && item.main_image_width < 300 %>
       <figure class="is-hidden-closed is-pulled-right mr-0 ml-2">
-        <img src="<%= url_for(item.main_image) %>" alt="Main image for <%= item.title %>" loading="lazy" class="is-rounded is-max-height-96px is-max-width-96px">
+        <img src="<%= item.main_image.variant(resize: '150x').service_url %>" alt="Main image for <%= item.title %>" loading="lazy" class="is-rounded is-max-height-96px is-max-width-96px">
       </figure>
       <% end %>
       <%= link_to item.title, item_read_url(item), target: '_blank', rel: 'noopener' %>
@@ -12,7 +12,7 @@
   <% if @show_images && item.main_image.attached? && item.main_image_width >= 300 %>
   <div class="card-image mb-4 is-border-bottom-darker is-border-top-darker">
     <figure class="image">
-      <img src="<%= url_for(item.main_image) %>" alt="Main image for <%= item.title %>" loading="lazy">
+      <img src="<%= item.main_image.variant(resize: '400x').service_url %>" alt="Main image for <%= item.title %>" loading="lazy">
     </figure>
   </div>
   <% end %>
