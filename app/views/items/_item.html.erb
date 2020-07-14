@@ -22,4 +22,15 @@
       <%= item.summary.html_safe %>
     </div>
   </div>
+  <% if Rails.env.development? %>
+  <footer class="card-footer has-background-white-bis">
+    <div class="card-footer-item">
+      <%= link_to item_url(item), class: 'has-icon' do %>
+      <span class="icon">
+        <i class="fas fa-link"></i>
+      </span>
+      <% end %>
+    </div>
+  </footer>
+  <% end %>
 </details>
