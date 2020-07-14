@@ -26,9 +26,13 @@ class Item < ApplicationRecord
     urls << html.scan(/<meta[^>]+property="og:image"[^>]+content="([^">]+)"/)
     urls.flatten.uniq.compact.each do |url|
       uri = URI.parse(url)
+      next if uri.scheme == 'data'
+
       uri.host = feed.url_host unless uri.host
       uri.scheme = feed.url_scheme unless uri.scheme
       uris << uri
+    rescue URI::InvalidURIError
+      next
     end
     uris.collect(&:to_s)
   end
@@ -51,7 +55,7 @@ class Item < ApplicationRecord
   end
 
   def largest_main_image
-    image_url_sizes_and_extension.keep_if { |url| %i[jpg png jpeg gif].include? url[:extension] }.max_by { |url| url[:size][0] }
+    image_url_sizes_and_extension.keep_if { |url| %i[jpg png jpeg gif].include? url[:extension] }.max_by { |url| url[:size] ? url[:size][0] : 0 }
   rescue StandardError
     nil
   end
@@ -80,22 +84,25 @@ class Item < ApplicationRecord
   end
 
   def main_image_width
-    main_image.metadata[:width]
+    main_image.metadata[:width] || 0
   rescue StandardError
     0
   end
 
   def set_html
-    if html.empty?
-      url_html = Rails.cache.fetch("html_#{Digest::MD5.hexdigest(url)}") do
-        URI.open(url).read
-      end
-      update(html: url_html)
+    url_html = Rails.cache.fetch("html_#{Digest::MD5.hexdigest(url)}") do
+      URI.open(url).read
     end
+    update(html: url_html)
   end
 
   def get_html_and_main_image
+    set_html if html.empty?
+    attach_main_image unless main_image.attached?
+  end
+
+  def reget_html_and_main_image
     set_html
-    attach_main_image
+    reattach_main_image
   end
 end
