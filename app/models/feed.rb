@@ -56,8 +56,13 @@ class Feed < ApplicationRecord
     rescue OpenURI::HTTPRedirect => e
       url = e.uri.to_s # assigned from the "Location" response header
       retry if (tries -= 1) > 0
-    rescue OpenURI::HTTPError, SocketError
-      response = nil
+    rescue OpenURI::HTTPError, SocketError => e
+      if e.message == '308 Permanent Redirect'
+        url = e.io.meta['location']
+        retry if (tries -= 1) > 0
+      else
+        response = nil
+      end
     end
 
     if response
