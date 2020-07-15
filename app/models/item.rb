@@ -26,7 +26,7 @@ class Item < ApplicationRecord
     urls << original['description']&.scan(/<img[^>]+src="([^">]+)"/)
     urls << original['content:encoded']&.scan(/<img[^>]+src="([^">]+)"/)
     urls << html.scan(/<img[^>]+src="([^">]+)"/)
-    urls << open_graph_images
+    urls << html.scan(/<meta[^>]+property="og:image"[^>]+content="([^">]+)"/)
     urls.flatten.uniq.compact.each do |url|
       uri = URI.parse(url)
       next if uri.scheme == 'data'
