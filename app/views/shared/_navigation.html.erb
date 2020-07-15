@@ -11,6 +11,7 @@
       <div class="dropdown-menu is-width-100percent" id="dropdown-profiles" role="menu">
         <div class="dropdown-content is-border-solid-2px-white-ter mx-5">
           <%= link_to t('navigation.about'), about_url(), class: 'dropdown-item' %>
+          <%= link_to t('navigation.all_feeds'), feeds_url(), class: 'dropdown-item' %>
           <hr class="dropdown-divider">
           <% if user_signed_in? %>
           <%= link_to t('navigation.edit_account'), edit_user_registration_url(), class: 'dropdown-item' %>

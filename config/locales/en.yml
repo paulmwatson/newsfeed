@@ -21,6 +21,7 @@ en:
     change_password: Change your password
     save_new_password: Save New Password
   headings:
+    all_feeds: All Feeds
     edit_profile: Edit List
     new_profile: New List
     about_newsfeed: About Newsfeed
@@ -35,6 +36,7 @@ en:
     change_password: Change Your Password
     edit_account: Edit Your Account
   navigation: 
+    all_feeds: All Feeds
     your_profiles: Your Lists
     about: About Newsfeed
     personalise: Personalise

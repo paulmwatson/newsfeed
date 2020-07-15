@@ -14,6 +14,10 @@ $max-widths: 10, 20, 25, 30, 40;
   width: 100%;
 }
 
+.is-height-100percent {
+  height: 100%;
+}
+
 .is-position-absolute-right-0 {
   position: absolute;
   right: 0;
@@ -117,4 +121,16 @@ $max-widths: 10, 20, 25, 30, 40;
 
 .is-max-width-96px {
   max-width: 128px !important;
+}
+
+.is-display-block {
+  display: block;
+}
+
+.is-height-24px {
+  height: 56px;
+}
+
+.is-width-24px {
+  width: 56px;
 }

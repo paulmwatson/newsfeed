@@ -1,6 +1,20 @@
-<h1 class="title is-size-5 mb-0 has-text-centered has-background-white-bis pt-4 pb-4 is-box-shadow-inset">
-  <%= t('headings.your_lists') %>
-</h1>
+<div class="has-text-centered has-background-white-bis is-box-shadow-inset mb-0">
+  <div class="container is-max-width-30em">
+    <%= link_to back_url, class: 'is-pulled-left has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <% end %>
+    <%= link_to new_profile_url(), class: 'is-pulled-right has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-plus"></i>
+    </span>
+    <% end %>
+    <h1 class="title is-size-5 pb-4 pt-4 is-display-block">
+      <%= t('headings.your_lists') %>
+    </h1>
+  </div>
+</div>
 <div class="container is-max-width-30em px-2">
   <% @profiles.each do |profile| %>
   <div class="card mt-4">

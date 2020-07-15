@@ -1,8 +1,25 @@
-<section class="section pt-2 px-2">
-  <div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+<div class="has-text-centered has-background-white-bis is-box-shadow-inset mb-0">
+  <div class="container is-max-width-30em">
+    <%= link_to back_url, class: 'is-pulled-left has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <% end %>
+    <%= link_to @item.url, class: 'is-pulled-right has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-external-link-alt"></i>
+    </span>
+    <% end %>
+    <h1 class="title is-size-5 pb-4 pt-4 is-display-block">
+      <%= @item.feed.title %>
+    </h1>
+  </div>
+</div>
+<div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+  <section class="section pt-4 px-2">
     <div class="has-text-centered content has-text-grey-light is-size-7 mb-1">
       <%= "#{time_ago_in_words(@item.published_at)} ago" %>
     </div>
     <%= render partial: '/items/item', locals: {item: @item }%>
-  </div>
-</section>
+  </section>
+</div>
