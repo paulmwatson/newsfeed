@@ -91,6 +91,10 @@ $max-widths: 10, 20, 25, 30, 40;
 
 .is-border-top-solid-2px-primary {
   border-top: solid 2px $primary;
+
+  @media (prefers-color-scheme: dark) {
+    border-top-color: $primary-dark;
+  }
 }
 
 .is-position-fixed-top-0 {
@@ -133,4 +137,82 @@ $max-widths: 10, 20, 25, 30, 40;
 
 .is-width-24px {
   width: 56px;
+}
+
+button.is-warning {
+  @media (prefers-color-scheme: dark) {
+    background-color: $warning-dark !important;
+  }
+}
+
+div.has-background-white-bis,
+section.has-background-white-bis {
+  @media (prefers-color-scheme: dark) {
+    color: $white-bis !important;
+    background-color: $black-ter !important;
+  }
+}
+
+h1.title {
+  @media (prefers-color-scheme: dark) {
+    color: $grey-lighter !important;
+  }
+}
+
+.dropdown-content {
+  @media (prefers-color-scheme: dark) {
+    background-color: $grey-darker !important;
+    border-color: $black-ter !important;
+
+    .dropdown-divider {
+      background-color: $black-ter;
+    }
+
+    .dropdown-item {
+      color: $white-bis;
+
+      &:hover {
+        background-color: $black-ter;
+        color: $white-ter;
+      }
+    }
+  }
+}
+
+.label,
+label.checkbox {
+  @media (prefers-color-scheme: dark) {
+    color: $white-bis;
+
+    &:hover {
+      color: $white-ter;
+    }
+  }
+}
+
+hr {
+  @media (prefers-color-scheme: dark) {
+    background-color: $grey-darker;
+  }
+}
+
+p {
+  @media (prefers-color-scheme: dark) {
+    color: $grey-lighter;
+  }
+}
+
+.input {
+  @media (prefers-color-scheme: dark) {
+    background-color: $grey-darker;
+    color: $white-bis;
+    border-color: $grey;
+  }
+}
+
+.button {
+  @media (prefers-color-scheme: dark) {
+    background-color: $grey-darker;
+    color: $grey-lighter;
+  }
 }

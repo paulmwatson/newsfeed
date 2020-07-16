@@ -14,6 +14,8 @@
  */
 
 $primary: hsl(36, 100%, 50%);
+$primary-dark: hsl(36, 100%, 20%);
+$warning-dark: hsl(48, 100%, 47%);
 $hr-background-color: hsl(0, 0%, 86%);
 
 @import 'bulma/sass/utilities/_all';
@@ -49,4 +51,5 @@ $hr-background-color: hsl(0, 0%, 86%);
 
 @import 'animate.css/animate';
 
+@import 'main';
 @import 'items';

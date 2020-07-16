@@ -1,0 +1,32 @@
+@import 'bulma/sass/utilities/_all';
+@import 'bulma/sass/helpers/color';
+
+html {
+  height: 100%;
+  background-color: $white-ter;
+  @media (prefers-color-scheme: dark) {
+    background-color: $black-ter;
+  }
+}
+
+.card {
+  @media (prefers-color-scheme: dark) {
+    color: $grey-lighter !important;
+    background-color: $grey-dark !important;
+  }
+
+  .card-image {
+    img {
+      @media (prefers-color-scheme: dark) {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .card-footer {
+    @media (prefers-color-scheme: dark) {
+      border-top-color: $grey-dark;
+      background-color: $grey-darker !important;
+    }
+  }
+}

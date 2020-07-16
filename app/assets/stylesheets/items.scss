@@ -42,6 +42,10 @@ details.card {
     a {
       color: $link;
       pointer-events: unset;
+
+      @media (prefers-color-scheme: dark) {
+        color: $turquoise;
+      }
     }
   }
 }
