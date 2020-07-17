@@ -2,7 +2,6 @@
 @import 'bulma/sass/helpers/color';
 
 html {
-  height: 100%;
   background-color: $white-ter;
   @media (prefers-color-scheme: dark) {
     background-color: $black-ter;

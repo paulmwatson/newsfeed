@@ -17,6 +17,7 @@ $primary: hsl(36, 100%, 50%);
 $primary-dark: hsl(36, 100%, 20%);
 $warning-dark: hsl(48, 100%, 47%);
 $hr-background-color: hsl(0, 0%, 86%);
+$navbar-height: 4rem;
 
 @import 'bulma/sass/utilities/_all';
 @import 'bulma/sass/helpers/color';
