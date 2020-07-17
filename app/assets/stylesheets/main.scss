@@ -36,6 +36,7 @@ html {
     a {
       @media (prefers-color-scheme: dark) {
         color: $turquoise;
+        font-weight: normal;
       }
     }
   }
