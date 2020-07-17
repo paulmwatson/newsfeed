@@ -30,3 +30,13 @@ html {
     }
   }
 }
+
+.card {
+  .card-header-title {
+    a {
+      @media (prefers-color-scheme: dark) {
+        color: $turquoise;
+      }
+    }
+  }
+}
