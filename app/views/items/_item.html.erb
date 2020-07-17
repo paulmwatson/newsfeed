@@ -12,7 +12,7 @@
   <% if @show_images && item.main_image.attached? && item.main_image_width >= 300 %>
   <div class="card-image mb-4 is-border-bottom-darker is-border-top-darker">
     <figure class="image">
-      <img src="<%= item.main_image.variant(resize: '400x').service_url %>" alt="Main image for <%= item.title %>" loading="lazy">
+      <img src="<%= item.main_image.variant(resize: '400x').service_url %>" alt="Main image for <%= item.title %>" loading="lazy" class="has-background-white">
     </figure>
   </div>
   <% end %>
