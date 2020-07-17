@@ -19,8 +19,8 @@ class ProfilesController < ApplicationController
   def show
     @show_images = @profile.show_images
     @menu_text = @profile
-    @time_range = (params[:time_range] || 24).to_i
-    @items = Item.includes(:feed, :item_users).where(feed_id: @profile.feed_ids).where('published_at > ?', (Time.now - @time_range.hours)).order(published_at: :desc)
+    @last_hours = (params[:last_hours] || @profile.last_hours).to_i
+    @items = Item.includes(:feed, :item_users).where(feed_id: @profile.feed_ids).where('published_at > ?', (Time.now - @last_hours.hours)).order(published_at: :desc)
     @seen_items = current_user.item_users.where(item: @items).pluck(:item_id)
     @items = @items.to_a.keep_if { |item| !@seen_items.include? item.id } unless @profile.show_read_items
   end
