@@ -22,6 +22,7 @@
       <%= item.summary.html_safe %>
     </div>
   </div>
+  <% unless @hide_item_footer %>
   <footer class="card-footer has-background-white-bis">
     <div class="card-footer-item">
       <%= link_to item_url(item), class: 'has-icon' do %>
@@ -30,5 +31,28 @@
       </span>
       <% end %>
     </div>
+    <div class="card-footer-item">
+      <% if @default_collection_items&.include? item.id %>
+      <%= link_to collection_remove_item_url(current_user.default_collection_id, item_id: item.id), data: {controller: 'aget', action:'click->aget#get'}, class: 'has-icon' do %>
+      <span class="icon">
+        <i class="fas fa-bookmark"></i>
+      </span>
+      <% end %>
+      <% else %>
+      <%= link_to collection_add_item_url(current_user.default_collection_id, item_id: item.id), data: {controller: 'aget', action:'click->aget#get'}, class: 'has-icon' do %>
+      <span class="icon">
+        <i class="far fa-bookmark"></i>
+      </span>
+      <% end %>
+      <% end %>
+    </div>
+    <div class="card-footer-item">
+      <%= link_to collections_url(item_id: item.id), class: 'has-icon' do %>
+      <span class="icon">
+        <i class="fas fa-ellipsis-v"></i>
+      </span>
+      <% end %>
+    </div>
   </footer>
+  <% end %>
 </details>

@@ -22,6 +22,7 @@ class ProfilesController < ApplicationController
     @last_hours = (params[:last_hours] || @profile.last_hours).to_i
     @items = Item.includes(:feed, :item_users).where(feed_id: @profile.feed_ids).where('published_at > ?', (Time.now - @last_hours.hours)).order(published_at: :desc)
     @seen_items = current_user.item_users.where(item: @items).pluck(:item_id)
+    @default_collection_items = current_user.default_collection.item_ids
     @items = @items.to_a.keep_if { |item| !@seen_items.include? item.id } unless @profile.show_read_items
   end
 

@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   has_many :item_users, dependent: :destroy
   has_one_attached :main_image, acl: :public
+  has_many :collection_items, dependent: :destroy
+  has_many :collections, through: :collection_items
 
   belongs_to :feed
 

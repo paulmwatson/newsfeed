@@ -26,6 +26,10 @@ html {
     @media (prefers-color-scheme: dark) {
       border-top-color: $grey-dark;
       background-color: $grey-darker !important;
+
+      .card-footer-item {
+        border-right-color: $grey-dark;
+      }
     }
   }
 }

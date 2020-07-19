@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_204442) do
+ActiveRecord::Schema.define(version: 2020_07_17_143200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -35,6 +35,34 @@ ActiveRecord::Schema.define(version: 2020_07_13_204442) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "collection_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "collection_id", null: false
+    t.uuid "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id"], name: "index_collection_items_on_collection_id"
+    t.index ["item_id"], name: "index_collection_items_on_item_id"
+  end
+
+  create_table "collection_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "collection_id", null: false
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id"], name: "index_collection_users_on_collection_id"
+    t.index ["user_id"], name: "index_collection_users_on_user_id"
+  end
+
+  create_table "collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "collection_type", default: 0, null: false
+    t.boolean "public", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "feed_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -97,11 +125,16 @@ ActiveRecord::Schema.define(version: 2020_07_13_204442) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "default_collection_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collection_items", "collections"
+  add_foreign_key "collection_items", "items"
+  add_foreign_key "collection_users", "collections"
+  add_foreign_key "collection_users", "users"
   add_foreign_key "feed_profiles", "feeds"
   add_foreign_key "feed_profiles", "profiles"
   add_foreign_key "item_users", "items"

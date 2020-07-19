@@ -1,0 +1,58 @@
+<div class="has-text-centered has-background-white-bis is-box-shadow-inset mb-0">
+  <div class="container is-max-width-30em">
+    <%= link_to back_url, class: 'is-pulled-left has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <% end %>
+    <%= link_to new_collection_url(), class: 'is-pulled-right has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-plus"></i>
+    </span>
+    <% end %>
+    <h1 class="title is-size-5 pb-4 pt-4 is-display-block">
+      <%= @item ? t('headings.add_item_to_collection') : t('headings.your_collections') %>
+    </h1>
+  </div>
+</div>
+<div class="container is-max-width-30em px-2 pt-4">
+  <% if @item %>
+  <%= render partial: '/items/item', locals: {item: @item }%>
+  <hr>
+  <% end %>
+  <% @collections.each do |collection| %>
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <%= link_to collection, collection %>
+      </p>
+      <% if @item %>
+      <% if collection.item_ids.include? @item.id %>
+      <%= link_to collection_remove_item_url(collection, item_id: @item.id), data: {controller: 'aget', action:'click->aget#get'}, class: 'card-header-icon' do %>
+      <span class="icon">
+        <i class="fas fa-bookmark" aria-hidden="true"></i>
+      </span>
+      <% end %>
+      <% else %>
+      <%= link_to collection_add_item_url(collection, item_id: @item.id), data: {controller: 'aget', action:'click->aget#get'}, class: 'card-header-icon' do %>
+      <span class="icon">
+        <i class="far fa-bookmark" aria-hidden="true"></i>
+      </span>
+      <% end %>
+      <% end %>
+      <% else %>
+      <%= link_to edit_collection_url(collection), class: 'card-header-icon' do %>
+      <span class="icon">
+        <i class="fas fa-edit" aria-hidden="true"></i>
+      </span>
+      <% end %>
+      <%= link_to collection, method: :delete, data: {confirm: t('common.are_you_sure')}, class: 'card-header-icon has-text-danger' do %>
+      <span class="icon">
+        <i class="far fa-trash-alt" aria-hidden="true"></i>
+      </span>
+      <% end %>
+      <% end %>
+    </header>
+  </div>
+  <% end %>
+</div>

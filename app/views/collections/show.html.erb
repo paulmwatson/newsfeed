@@ -1,0 +1,23 @@
+<div class="has-text-centered has-background-white-bis is-box-shadow-inset mb-0">
+  <div class="container is-max-width-30em">
+    <%= link_to back_url, class: 'is-pulled-left has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <% end %>
+    <%= link_to edit_collection_url(@collection), class: 'is-pulled-right has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-edit"></i>
+    </span>
+    <% end %>
+    <h1 class="title is-size-5 pb-4 pt-4 is-display-block">
+      <%= @collection.name %>
+    </h1>
+  </div>
+</div>
+<div class="container is-max-width-30em mt-2 animate__animated animate__slideInUp">
+  <section class="section pt-4 px-2">
+    <%= render partial: '/items/items', locals: {items: @items } %>
+    <%= render partial: '/shared/bottom_buffer' %>
+  </section>
+</div>

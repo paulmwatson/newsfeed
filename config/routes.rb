@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :collections do
+    get '/add-item/:item_id' => 'collections#add_item', as: :add_item
+    get '/remove-item/:item_id' => 'collections#remove_item', as: :remove_item
+  end
+
   get 'about' => 'site#about', as: :about
 
   resources :profiles

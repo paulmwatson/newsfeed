@@ -4,6 +4,8 @@ en:
     '72': Last 3 days (covers weekends)
     '8760': Last year
   info:
+    removed_item_from_collection: Removed item from collection
+    added_item_to_collection: Added item to collection
     no_items: No new items to read, and that's OK.
     password_minimum: '%{minimum} characters minimum'
   fields:
@@ -21,11 +23,13 @@ en:
     change_password: Change your password
     save_new_password: Save New Password
   headings:
+    add_item_to_collection: Add Item To Your Collections
+    your_collections: Your Collections
     all_feeds: All Feeds
     edit_profile: Edit List
     new_profile: New List
     about_newsfeed: About Newsfeed
-    your_lists: Your Lists
+    your_profiles: Your Lists
     forgot_password: Forgot your password?
     test_it: Test It
     sign_in: Sign In

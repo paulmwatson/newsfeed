@@ -23,6 +23,7 @@
           <% current_user.profiles.order(default: :desc).order(:name).limit(8).each do |profile| %>
           <%= link_to profile, profile_url(profile.id), class: "dropdown-item is-overflow-x-hidden-ellipsis#{' has-text-weight-bold' if profile == @profile}" %>
           <% end %>
+          <%= link_to current_user.default_collection, collection_url(current_user.default_collection_id), class: "dropdown-item is-overflow-x-hidden-ellipsis#{' has-text-weight-bold' if current_user.default_collection == @collection}" %>
           <%- else -%>
           <%= link_to t('navigation.sign_in'), :new_user_session, class: 'dropdown-item' %>
           <%= link_to t('navigation.sign_up'), :new_user_registration, class: 'dropdown-item' %>
