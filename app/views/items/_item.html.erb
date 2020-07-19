@@ -31,6 +31,7 @@
       </span>
       <% end %>
     </div>
+    <% if current_user %>
     <div class="card-footer-item">
       <% if @default_collection_items&.include? item.id %>
       <%= link_to collection_remove_item_url(current_user.default_collection_id, item_id: item.id), data: {controller: 'aget', action:'click->aget#get'}, class: 'has-icon' do %>
@@ -46,6 +47,7 @@
       <% end %>
       <% end %>
     </div>
+    <% end %>
     <div class="card-footer-item">
       <%= link_to collections_url(item_id: item.id), class: 'has-icon' do %>
       <span class="icon">
