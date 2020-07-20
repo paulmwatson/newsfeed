@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
 
   def add_item
     item = Item.find(params[:item_id])
-    @collection.items << item unless @collection.item_ids.includes? params[:item_id]
+    @collection.items << item unless @collection.item_ids.include? params[:item_id]
 
     if request.xhr?
       render json: true
