@@ -5,8 +5,7 @@ import { Controller } from 'stimulus'
 
 export default class extends Controller {
   back(e) {
-    if (history.back()) {
-      e.preventDefault()
-    }
+    e.preventDefault()
+    history.back()
   }
 }
