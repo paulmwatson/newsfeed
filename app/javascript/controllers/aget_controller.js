@@ -9,9 +9,16 @@ export default class extends Controller {
     const icon = this.element.querySelector('.icon i')
     icon.classList.toggle('far')
     icon.classList.toggle('fas')
+    icon.parentNode.classList.remove('animate__animated')
+    icon.parentNode.classList.remove('animate__heartBeat')
+    void icon.parentNode.offsetWidth
     icon.parentNode.classList.add('animate__animated')
     icon.parentNode.classList.add('animate__heartBeat')
-    await fetch(this.element.href)
+    await fetch(this.element.href, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
     if (this.element.href.includes('add-')) {
       this.element.href = this.element.href.replace('add-', 'remove-')
     } else {
