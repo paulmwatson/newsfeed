@@ -6,11 +6,12 @@ class CollectionsController < ApplicationController
 
   def add_item
     item = Item.find(params[:item_id])
-    @collection.items << item
+    @collection.items << item unless @collection.item_ids.includes? params[:item_id]
 
-    respond_to do |format|
-      format.html { redirect_to request.referer || @collection, notice: I18n.t('info.added_item_to_collection') }
-      format.json { render plain: true }
+    if request.xhr?
+      render json: true
+    else
+      redirect_to collection_url(@collection), notice: I18n.t('info.added_item_to_collection')
     end
   end
 
@@ -18,9 +19,10 @@ class CollectionsController < ApplicationController
     item = Item.find(params[:item_id])
     @collection.items.delete(item)
 
-    respond_to do |format|
-      format.html { redirect_to request.referer || @collection, notice: I18n.t('info.removed_item_from_collection') }
-      format.json { render plain: true }
+    if request.xhr?
+      render json: true
+    else
+      redirect_to collection_url(@collection), notice: I18n.t('info.removed_item_from_collection')
     end
   end
 
@@ -38,7 +40,8 @@ class CollectionsController < ApplicationController
   def show
     @show_images = true
     @menu_text = @collection
-    @items = @collection.items.order(published_at: :desc)
+    @items = @collection.items.order('collection_items.created_at': :desc)
+    @default_collection_items = current_user.default_collection.item_ids
     @seen_items = current_user.item_users.where(item: @items, action: :read).pluck(:item_id) if @collection.read_later?
   end
 
