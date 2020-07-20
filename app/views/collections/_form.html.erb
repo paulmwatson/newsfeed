@@ -1,32 +1,21 @@
 <%= form_with(model: collection, local: true) do |form| %>
-  <% if collection.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(collection.errors.count, "error") %> prohibited this collection from being saved:</h2>
 
-      <ul>
-        <% collection.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<div class="field">
+  <label class="label">Give your collection a name:</label>
+  <div class="control">
+    <%= form.text_field :name, class: 'input', autofocus: true, required: true %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
+<div class="field">
+  <label class="label">And describe it:</label>
+  <div class="control">
+    <%= form.text_area :description, class: 'textarea' %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.number_field :type %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<hr>
+<p class="content has-text-centered">
+  <%= form.submit t("buttons.#{@collection.new_record? ? 'create' : 'save'}_collection"), class: 'button is-success' %>
+</p>
 <% end %>

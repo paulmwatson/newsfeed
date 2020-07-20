@@ -17,13 +17,27 @@
           <%= link_to t('navigation.edit_account'), edit_user_registration_url(), class: 'dropdown-item' %>
           <%= link_to t('navigation.sign_out'), :destroy_user_session, method: :delete, class: 'dropdown-item' %>
           <hr class="dropdown-divider">
-          <%= link_to t('common.new_profile'), new_profile_url, class: 'dropdown-item has-text-success' %>
           <%= link_to t('navigation.your_profiles'), profiles_url(), class: 'dropdown-item' %>
+          <%= link_to t('navigation.your_collections'), collections_url(), class: 'dropdown-item' %>
           <hr class="dropdown-divider">
           <% current_user.profiles.order(default: :desc).order(:name).limit(8).each do |profile| %>
-          <%= link_to profile, profile_url(profile.id), class: "dropdown-item is-overflow-x-hidden-ellipsis#{' has-text-weight-bold' if profile == @profile}" %>
+          <%= link_to profile_url(profile.id), class: "dropdown-item is-overflow-x-hidden-ellipsis#{' has-text-weight-bold' if profile == @profile}" do %>
+          <span class="icon">
+            <i class="fas fa-list"></i>
+          </span>
+          <span>
+            <%= profile %>
+          </span>
           <% end %>
-          <%= link_to current_user.default_collection, collection_url(current_user.default_collection_id), class: "dropdown-item is-overflow-x-hidden-ellipsis#{' has-text-weight-bold' if current_user.default_collection == @collection}" %>
+          <% end %>
+          <%= link_to collection_url(current_user.default_collection_id), class: "dropdown-item is-overflow-x-hidden-ellipsis#{' has-text-weight-bold' if current_user.default_collection == @collection}" do %>
+          <span class="icon">
+            <i class="fas fa-bookmark"></i>
+          </span>
+          <span>
+            <%= current_user.default_collection %>
+          </span>
+          <% end %>
           <%- else -%>
           <%= link_to t('navigation.sign_in'), :new_user_session, class: 'dropdown-item' %>
           <%= link_to t('navigation.sign_up'), :new_user_registration, class: 'dropdown-item' %>

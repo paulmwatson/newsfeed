@@ -60,6 +60,7 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       if @collection.save
+        current_user.collections << @collection
         format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
         format.json { render :show, status: :created, location: @collection }
       else

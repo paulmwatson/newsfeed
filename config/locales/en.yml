@@ -12,6 +12,8 @@ en:
     new_password: New password
     your_email: 'Your email address:'
   buttons:
+    save_collection: Save Collection
+    create_collection: Create Collection
     sign_up: Sign Up
     sign_in: Sign In
     forgot_password: Forgot password?
@@ -23,6 +25,8 @@ en:
     change_password: Change your password
     save_new_password: Save New Password
   headings:
+    edit_collection: Edit Collection
+    new_collection: New Collection
     add_item_to_collection: Add Item To Your Collections
     your_collections: Your Collections
     all_feeds: All Feeds
@@ -40,6 +44,7 @@ en:
     change_password: Change Your Password
     edit_account: Edit Your Account
   navigation: 
+    your_collections: Your Collections
     all_feeds: All Feeds
     your_profiles: Your Lists
     about: About Newsfeed

@@ -1,6 +1,19 @@
-<h1>Editing Collection</h1>
+<div class="has-text-centered has-background-white-bis is-box-shadow-inset mb-0">
+  <div class="container is-max-width-30em">
+    <%= link_to collections_url, data: {controller: 'history', action: 'click->history#back'}, class: 'is-pulled-left has-text-grey is-height-24px is-width-24px on-hover-has-text-link' do %>
+    <span class="icon is-height-100percent is-width-100percent">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <% end %>
+    <div class="is-pulled-right is-height-24px is-width-24px"></div>
+    <h1 class="title is-size-5 pb-4 pt-4 is-display-block">
+      <%= t('headings.edit_collection') %>
+    </h1>
+  </div>
+</div>
 
-<%= render 'form', collection: @collection %>
-
-<%= link_to 'Show', @collection %> |
-<%= link_to 'Back', collections_path %>
+<div class="container is-max-width-30em">
+  <section class="section">
+    <%= render 'form', collection: @collection %>
+  </section>
+</div>
