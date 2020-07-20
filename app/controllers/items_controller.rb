@@ -24,8 +24,8 @@ class ItemsController < ApplicationController
     @show_images = true
     @menu_text = I18n.t('navigation.personalise')
     @items = Item.includes(:feed).order(published_at: :desc).limit(100)
-    @default_collection_items = current_user&.default_collection.item_ids
-    @seen_items = current_user&.item_users.where(item: @items).pluck(:item_id)
+    @default_collection_items = current_user&.default_collection&.item_ids
+    @seen_items = current_user&.item_users&.where(item: @items)&.pluck(:item_id)
   end
 
   # GET /items/1
