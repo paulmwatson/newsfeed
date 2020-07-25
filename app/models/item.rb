@@ -65,17 +65,17 @@ class Item < ApplicationRecord
       url_metadata[:extension] = Rails.cache.fetch("fastimage_type_#{Digest::MD5.hexdigest(url)}", skip_nil: true) do
         FastImage.type(url, http_header: { 'User-Agent': 'Wget/1.11.4' })
       end
-      urls_with_size_and_extension << url_metadata
+      urls_with_size_and_extension << url_metadata if %i[jpg png jpeg gif].include? url_metadata[:extension]
     end
     urls_with_size_and_extension
   end
 
-  def largest_valid_image
-    get_image_size_and_extensions(image_urls).keep_if { |url| %i[jpg png jpeg gif].include? url[:extension] }.max_by { |url| url[:size] ? url[:size][0] : 0 }
+  def largest_image
+    get_image_size_and_extensions(image_urls).max_by { |url| url[:size] ? url[:size][0] : 0 }
   end
 
   def best_image
-    get_image_size_and_extensions(open_graph_image_urls)[0] || largest_valid_image
+    get_image_size_and_extensions(open_graph_image_urls)[0] || largest_image
   end
 
   def attach_main_image
